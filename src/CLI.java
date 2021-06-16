@@ -10,6 +10,8 @@ public class CLI {
 //        new ConsoleBeobachterRemove(s);
 //
 //        s.start();
+         FastVollBeobachter beobachter = new FastVollBeobachter(s);
 
+         s.start();
     }
 }

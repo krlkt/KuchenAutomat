@@ -82,8 +82,8 @@ public class AutomatTest {
 
     @Test
     public void showKuchenOnAutomat() throws Exception {
-        automat.addKuchen(obstkuchenA, "obstkuchenA",5);
-        automat.addKuchen(obstkuchenB, "obstkuchenB",99);
+        automat.addKuchen(obstkuchenA, "obstkuchenA", 5);
+        automat.addKuchen(obstkuchenB, "obstkuchenB");
         System.out.println(automat.showKuchenList());
 
         Assert.assertEquals(automat.getKuchen(5),obstkuchenA);

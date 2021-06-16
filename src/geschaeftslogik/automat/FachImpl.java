@@ -1,6 +1,8 @@
 package geschaeftslogik.automat;
 
-public class FachImpl implements Fach {
+import java.io.Serializable;
+
+public class FachImpl implements Fach, Serializable {
     int fachNummer;
     Verkaufskuchen kuchen;
 

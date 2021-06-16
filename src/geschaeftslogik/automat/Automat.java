@@ -1,8 +1,9 @@
 package geschaeftslogik.automat;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Automat {
+public class Automat implements Serializable {
     /**
      * Anzahl von faecher musst bei der Erstellung von Automat eingegeben werden
      */
@@ -236,5 +237,28 @@ public class Automat {
 
     public void setFaecher(Fach[] faecher) {
         this.faecher = faecher;
+    }
+
+    //for testing purposes, fill the automat with 3 manufacturers and 6 cakes, 2 cakes for each type
+    public void fillAutomat() throws Exception {
+        Hersteller hersteller = new HerstellerImpl("hersteller");
+        Hersteller hersteller2 = new HerstellerImpl("hersteller2");
+        Hersteller hersteller3 = new HerstellerImpl("hersteller3");
+        Obstkuchen obstkuchen = new ObstkuchenImpl("erdbeer", hersteller);
+        Obstkuchen obstkuchen2 = new ObstkuchenImpl("banana", hersteller);
+        Kremkuchen kremkuchen = new KremkuchenImpl("cream1", hersteller);
+        Kremkuchen kremkuchen2 = new KremkuchenImpl("cream2", hersteller);
+        Obsttorte obsttorte = new ObsttorteImpl("erdbeer", "cream1", hersteller2);
+        Obsttorte obsttorte2 = new ObsttorteImpl("banana", "cream2", hersteller2);
+
+        this.addHersteller(hersteller);
+        this.addHersteller(hersteller2);
+        this.addHersteller(hersteller3);
+        this.addKuchen(kremkuchen, "cream cake");
+        this.addKuchen(kremkuchen2, "cream cake2");
+        this.addKuchen(obstkuchen, "fruit cake");
+        this.addKuchen(obstkuchen2, "fruit cake2");
+        this.addKuchen(obsttorte, "fruit tart");
+        this.addKuchen(obsttorte2, "fruit tart2");
     }
 }

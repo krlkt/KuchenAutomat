@@ -1,6 +1,8 @@
 package geschaeftslogik.automat;
 
-public class HerstellerImpl implements Hersteller{
+import java.io.Serializable;
+
+public class HerstellerImpl implements Hersteller, Serializable {
     String name;
 
     //Constructor

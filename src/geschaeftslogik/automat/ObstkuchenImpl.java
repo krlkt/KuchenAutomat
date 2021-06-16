@@ -1,11 +1,12 @@
 package geschaeftslogik.automat;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.Collection;
 import java.util.Date;
 
-public class ObstkuchenImpl implements Obstkuchen {
+public class ObstkuchenImpl implements Obstkuchen, Serializable {
     String obstsorte;
 
     //Kuchen Attribute
