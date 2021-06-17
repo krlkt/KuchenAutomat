@@ -7,11 +7,14 @@ public class Automat implements Serializable {
     /**
      * Anzahl von faecher musst bei der Erstellung von Automat eingegeben werden
      */
-    private final int faecherAnzahl;
+    private int faecherAnzahl=100;
+
     private Fach[] faecher;
     private List<Hersteller> herstellerList = new ArrayList<>();
 
     //Constructors
+    public Automat(){}
+
     public Automat(int faecherAnzahl){
         this.faecherAnzahl = faecherAnzahl;
         this.faecher = new Fach[faecherAnzahl];
@@ -239,6 +242,15 @@ public class Automat implements Serializable {
         this.faecher = faecher;
     }
 
+    public Fach[] getFaecher() {
+        return faecher;
+    }
+
+    public void setHerstellerList(List<Hersteller> herstellerList) {
+        this.herstellerList = herstellerList;
+    }
+
+
     //for testing purposes, fill the automat with 3 manufacturers and 6 cakes, 2 cakes for each type
     public void fillAutomat() throws Exception {
         Hersteller hersteller = new HerstellerImpl("hersteller");
@@ -260,5 +272,9 @@ public class Automat implements Serializable {
         this.addKuchen(obstkuchen2, "fruit cake2");
         this.addKuchen(obsttorte, "fruit tart");
         this.addKuchen(obsttorte2, "fruit tart2");
+    }
+
+    public void setFaecherAnzahl(int faecherAnzahl) {
+        this.faecherAnzahl = faecherAnzahl;
     }
 }

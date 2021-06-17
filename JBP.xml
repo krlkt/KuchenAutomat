@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="14.0.2" class="java.beans.XMLDecoder">
+ <object class="java.util.ArrayList">
+  <void method="add">
+   <object class="geschaeftslogik.automat.Automat" id="Automat0">
+    <int>100</int>
+    <void property="faecher">
+     <void index="0">
+      <object class="geschaeftslogik.automat.FachImpl">
+       <object class="geschaeftslogik.automat.KremkuchenImpl">
+        <string>cream1</string>
+        <object class="geschaeftslogik.automat.HerstellerImpl" id="HerstellerImpl0">
+         <string>hersteller</string>
+        </object>
+        <void property="inspektionsdatum">
+         <object class="java.util.Date">
+          <long>1623920388797</long>
+         </object>
+        </void>
+        <void property="name">
+         <string>cream cake: cream1</string>
+        </void>
+       </object>
+       <string>cream cake: cream1</string>
+      </object>
+     </void>
+     <void index="1">
+      <object class="geschaeftslogik.automat.FachImpl">
+       <object class="geschaeftslogik.automat.KremkuchenImpl">
+        <string>cream2</string>
+        <object idref="HerstellerImpl0"/>
+        <void property="fachnummer">
+         <int>1</int>
+        </void>
+        <void property="inspektionsdatum">
+         <object class="java.util.Date">
+          <long>1623920388797</long>
+         </object>
+        </void>
+        <void property="name">
+         <string>cream cake2: cream2</string>
+        </void>
+       </object>
+       <string>cream cake2: cream2</string>
+      </object>
+     </void>
+     <void index="2">
+      <object class="geschaeftslogik.automat.FachImpl">
+       <object class="geschaeftslogik.automat.ObstkuchenImpl">
+        <string>erdbeer</string>
+        <object idref="HerstellerImpl0"/>
+        <void property="fachnummer">
+         <int>2</int>
+        </void>
+        <void property="inspektionsdatum">
+         <object class="java.util.Date">
+          <long>1623920388797</long>
+         </object>
+        </void>
+        <void property="name">
+         <string>fruit cake: erdbeer</string>
+        </void>
+       </object>
+       <string>fruit cake: erdbeer</string>
+      </object>
+     </void>
+     <void index="3">
+      <object class="geschaeftslogik.automat.FachImpl">
+       <object class="geschaeftslogik.automat.ObstkuchenImpl">
+        <string>banana</string>
+        <object idref="HerstellerImpl0"/>
+        <void property="fachnummer">
+         <int>3</int>
+        </void>
+        <void property="inspektionsdatum">
+         <object class="java.util.Date">
+          <long>1623920388797</long>
+         </object>
+        </void>
+        <void property="name">
+         <string>fruit cake2: banana</string>
+        </void>
+       </object>
+       <string>fruit cake2: banana</string>
+      </object>
+     </void>
+     <void index="4">
+      <object class="geschaeftslogik.automat.FachImpl">
+       <object class="geschaeftslogik.automat.ObsttorteImpl">
+        <string>erdbeer</string>
+        <string>cream1</string>
+        <object class="geschaeftslogik.automat.HerstellerImpl" id="HerstellerImpl1">
+         <string>hersteller2</string>
+        </object>
+        <void property="fachnummer">
+         <int>4</int>
+        </void>
+        <void property="inspektionsdatum">
+         <object class="java.util.Date">
+          <long>1623920388797</long>
+         </object>
+        </void>
+        <void property="name">
+         <string>fruit tart: erdbeer, cream1</string>
+        </void>
+       </object>
+       <string>fruit tart: erdbeer, cream1</string>
+      </object>
+     </void>
+     <void index="5">
+      <object class="geschaeftslogik.automat.FachImpl">
+       <object class="geschaeftslogik.automat.ObsttorteImpl">
+        <string>banana</string>
+        <string>cream2</string>
+        <object idref="HerstellerImpl1"/>
+        <void property="fachnummer">
+         <int>5</int>
+        </void>
+        <void property="inspektionsdatum">
+         <object class="java.util.Date">
+          <long>1623920388797</long>
+         </object>
+        </void>
+        <void property="name">
+         <string>fruit tart2: banana, cream2</string>
+        </void>
+       </object>
+       <string>fruit tart2: banana, cream2</string>
+      </object>
+     </void>
+    </void>
+    <void property="herstellerList">
+     <void method="add">
+      <object idref="HerstellerImpl0"/>
+     </void>
+     <void method="add">
+      <object idref="HerstellerImpl1"/>
+     </void>
+     <void method="add">
+      <object class="geschaeftslogik.automat.HerstellerImpl">
+       <string>hersteller3</string>
+      </object>
+     </void>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>
