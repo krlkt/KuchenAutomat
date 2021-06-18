@@ -1,7 +1,8 @@
-Karel Karunia (575892) -- Abgabe 2
+Karel Karunia (575892) -- Abgabe 5
 
-erreichte Stand (die Nummer) bezüglich des Bewertungsschemas:
-Anforderung erfüllt
+JOS implementiert in /geschaeftslogk.automat/AutomatSerializable
+Main Methode in /JOS
 
-Simulation 2 leider immer noch nicht richtig implementiert :(
+JBP implementiert in /JBP
 
+Test von Serialization in /tst/geschaeftslogik.automat/AutomatSerializableTest
