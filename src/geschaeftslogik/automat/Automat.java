@@ -8,7 +8,7 @@ public class Automat implements Serializable {
      * Anzahl von faecher musst bei der Erstellung von Automat eingegeben werden
      */
     private int faecherAnzahl=100;
-    private Mode mode;
+    private Mode mode = Mode.Persistent; //default mode: Persistent
     private Fach[] faecher;
     private List<Hersteller> herstellerList = new ArrayList<>();
 

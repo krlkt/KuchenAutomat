@@ -13,5 +13,5 @@ public class ChangeModeEventHandler {
     public void remove(ChangeModeEventListener listener) {
         this.listenerList.remove(listener);
     }
-    public void handle(ChangeModeEvent event, Automat automat){for (ChangeModeEventListener listener : listenerList) listener.onChangeModeEvent(event, automat);}
+    public void handle(ChangeModeEvent event){for (ChangeModeEventListener listener : listenerList) listener.onChangeModeEvent(event);}
 }

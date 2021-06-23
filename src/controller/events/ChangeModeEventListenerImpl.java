@@ -4,8 +4,13 @@ import geschaeftslogik.automat.Automat;
 import geschaeftslogik.automat.Mode;
 
 public class ChangeModeEventListenerImpl implements ChangeModeEventListener{
+    Automat automat;
+
+    public ChangeModeEventListenerImpl(Automat automat){
+        this.automat = automat;
+    }
     @Override
-    public void onChangeModeEvent(ChangeModeEvent event, Automat automat) {
+    public void onChangeModeEvent(ChangeModeEvent event) {
         if(event.getText().equalsIgnoreCase(":c")){
             automat.setMode(Mode.Add);
             System.out.println("Changed to add mode");
