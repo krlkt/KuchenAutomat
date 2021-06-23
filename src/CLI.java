@@ -9,7 +9,7 @@ public class CLI {
 //        new ConsoleBeobachterShow(s);
 //        new ConsoleBeobachterRemove(s);
 //
-//        s.start();
+//        s.start()
          FastVollBeobachter beobachter = new FastVollBeobachter(s);
 
          s.start();

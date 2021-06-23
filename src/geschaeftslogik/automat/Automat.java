@@ -8,7 +8,7 @@ public class Automat implements Serializable {
      * Anzahl von faecher musst bei der Erstellung von Automat eingegeben werden
      */
     private int faecherAnzahl=100;
-
+    private Mode mode;
     private Fach[] faecher;
     private List<Hersteller> herstellerList = new ArrayList<>();
 
@@ -276,5 +276,13 @@ public class Automat implements Serializable {
 
     public void setFaecherAnzahl(int faecherAnzahl) {
         this.faecherAnzahl = faecherAnzahl;
+    }
+
+    public Mode getMode() {
+        return mode;
+    }
+
+    public void setMode(Mode mode) {
+        this.mode = mode;
     }
 }

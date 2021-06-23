@@ -16,10 +16,11 @@ public class MockitoFinalMethodSupportTest {
      */
     @Test
     void finalMethodSupportTest() {
-        ObjectWithFinalMethod fo=mock(ObjectWithFinalMethod.class);
+        ObjectWithFinalMethod fo = mock(ObjectWithFinalMethod.class);
         when(fo.test()).thenReturn(4);
-        assertEquals(4,fo.test());
+        assertEquals(4, fo.test());
     }
+
 
     @Test
     void addKuchenToAutomat() throws Exception {
