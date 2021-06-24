@@ -1,6 +1,7 @@
 package geschaeftslogik.automat;
 
 import java.math.BigDecimal;
+import java.time.Duration;
 import java.util.Date;
 
 public interface Verkaufsobjekt {
@@ -12,4 +13,7 @@ public interface Verkaufsobjekt {
     Hersteller getHersteller();
     String getName();
     void setName(String name);
+    void setPreis(BigDecimal preis);
+    void setNaehrwert(int naehrwert);
+    void setHaltbarkeit(Duration duration);
 }

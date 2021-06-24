@@ -51,6 +51,21 @@ public class KremkuchenImpl implements Kremkuchen, Serializable {
     }
 
     @Override
+    public void setPreis(BigDecimal preis) {
+        this.preis = preis;
+    }
+
+    @Override
+    public void setNaehrwert(int naehrwert) {
+        this.naehrwert = naehrwert;
+    }
+
+    @Override
+    public void setHaltbarkeit(Duration duration) {
+        this.haltbarkeit = haltbarkeit;
+    }
+
+    @Override
     public Collection<Allergen> getAllergene() {
         return this.allergene;
     }
@@ -94,6 +109,4 @@ public class KremkuchenImpl implements Kremkuchen, Serializable {
     public void setFachnummer(int fachNummer) {
         this.fachnummer = fachNummer;
     }
-
-
 }
