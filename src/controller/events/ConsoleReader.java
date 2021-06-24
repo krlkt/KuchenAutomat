@@ -1,10 +1,8 @@
 package controller.events;
 
-import geschaeftslogik.automat.Automat;
 import java.util.Scanner;
 
 public class ConsoleReader {
-    Automat automat = new Automat();
     InputEventHandler inputEventHandler;
     ChangeModeEventHandler changeModeEventHandler;
     public void setInputEventHandler(InputEventHandler inputEventHandler) { this.inputEventHandler = inputEventHandler; }
@@ -15,13 +13,17 @@ public class ConsoleReader {
             do {
                 System.out.println("Enter command:");
                 String text=s.nextLine();
-                Character c = text.charAt(0);
-                if(c.equals(':')){
-                    ChangeModeEvent e=new ChangeModeEvent(this, text);
-                    if(null!=this.changeModeEventHandler) changeModeEventHandler.handle(e);
-                }else{
-                    InputEvent e= new InputEvent(this, text);
-                    if(null!=this.inputEventHandler) inputEventHandler.handle(e);
+                if(!text.isEmpty()) {
+                    Character c = text.charAt(0);
+                    if (c.equals(':')) {
+                        ChangeModeEvent e = new ChangeModeEvent(this, text);
+                        if (null != this.changeModeEventHandler) changeModeEventHandler.handle(e);
+                    } else {
+                        InputEvent e = new InputEvent(this, text);
+                        if (null != this.inputEventHandler) inputEventHandler.handle(e);
+                    }
+                }else {
+                    System.out.println("Input can't be empty");
                 }
             }while (true);
         }

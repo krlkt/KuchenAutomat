@@ -62,7 +62,7 @@ public class KremkuchenImpl implements Kremkuchen, Serializable {
 
     @Override
     public void setHaltbarkeit(Duration duration) {
-        this.haltbarkeit = haltbarkeit;
+        this.haltbarkeit = duration;
     }
 
     @Override

@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -84,6 +85,8 @@ public class AutomatTest {
     public void showKuchenOnAutomat() throws Exception {
         automat.addKuchen(obstkuchenA, "obstkuchenA", 5);
         automat.addKuchen(obstkuchenB, "obstkuchenB");
+        Duration duration = Duration.ofDays(10);
+        obstkuchenA.setHaltbarkeit(duration);
         System.out.println(automat.showKuchenList());
 
         Assert.assertEquals(automat.getKuchen(5),obstkuchenA);
@@ -104,6 +107,7 @@ public class AutomatTest {
         automat.addKuchen(obsttorteC, "obstorteC");
         Kremkuchen kremA = new KremkuchenImpl("cream", hersteller);
         automat.addKuchen(kremA, "kremkuchenA");
+
         System.out.println(automat.showKuchenList("obstkuchen"));
     }
 
@@ -187,6 +191,22 @@ public class AutomatTest {
         automat.addKuchen(obstkuchenA, "obstkuchenA");
         automat.addKuchen(obstkuchenB, "obstkuchenB");
         System.out.println(automat.showAllergene());
+    }
+
+    @Test
+    public void showNotIncludedAllergene() throws Exception {
+        Collection<Allergen> allergenErdGlut = new LinkedList<>();
+        allergenErdGlut.add(Allergen.Erdnuss);
+        allergenErdGlut.add(Allergen.Gluten);
+        Collection<Allergen> allergenHas = new LinkedList<>();
+        allergenHas.add(Allergen.Haselnuss);
+
+        obstkuchenA.setAllergene(allergenErdGlut);
+        obstkuchenB.setAllergene(allergenHas);
+
+        automat.addKuchen(obstkuchenA, "obstkuchenA");
+        automat.addKuchen(obstkuchenB, "obstkuchenB");
+        System.out.println(automat.showNotIncludedAllergene());
     }
 
 }

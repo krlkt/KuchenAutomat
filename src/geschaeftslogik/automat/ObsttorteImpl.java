@@ -84,10 +84,6 @@ public class ObsttorteImpl implements Obsttorte, Serializable {
     }
 
     //setter
-    public void setObstsorte(String obstsorte) {
-        this.obstsorte = obstsorte;
-    }
-
     public void setHersteller(Hersteller hersteller) {
         this.hersteller = hersteller;
     }

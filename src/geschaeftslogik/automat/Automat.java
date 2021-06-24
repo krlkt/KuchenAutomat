@@ -8,7 +8,7 @@ public class Automat implements Serializable {
      * Anzahl von faecher musst bei der Erstellung von Automat eingegeben werden
      */
     private int faecherAnzahl=100;
-    private Mode mode = Mode.Persistent; //default mode: Persistent
+    private Mode mode = Mode.Add; //default mode: Add
     private Fach[] faecher;
     private List<Hersteller> herstellerList = new ArrayList<>();
 
@@ -145,41 +145,51 @@ public class Automat implements Serializable {
         String ergebnis="";
         for(int i=0; i<faecherAnzahl;i++){
             if(faecher[i] != null){
-                String fn = Integer.toString(faecher[i].getFachnummer());
-                ergebnis += fn +": " + faecher[i].getName() + System.lineSeparator();
+                ergebnis += print_helpMethod(i);
             }
         }
         return ergebnis;
     }
 
-    public String showKuchenList(String type) { //TODO schoener?
+    public String showKuchenList(String type) {
         String ergebnis="";
         switch(type){
             case "obstkuchen":
                 for(int i=0; i<faecherAnzahl;i++){
                     if(faecher[i] != null && faecher[i].getKuchen() instanceof ObstkuchenImpl){
-                        String fn = Integer.toString(faecher[i].getFachnummer());
-                        ergebnis += fn +": " + faecher[i].getName() + System.lineSeparator();
+                        ergebnis += print_helpMethod(i);
                     }
                 }  break;
             case "kremkuchen":
                 for(int i=0; i<faecherAnzahl;i++){
                     if(faecher[i] != null && faecher[i].getKuchen() instanceof KremkuchenImpl){
-                        String fn = Integer.toString(faecher[i].getFachnummer());
-                        ergebnis += fn +": " + faecher[i].getName() + System.lineSeparator();
+                        ergebnis += print_helpMethod(i);
                     }
                 } break;
             case "obsttorte":
                 for(int i=0; i<faecherAnzahl;i++){
                     if(faecher[i] != null && faecher[i].getKuchen() instanceof ObsttorteImpl){
-                        String fn = Integer.toString(faecher[i].getFachnummer());
-                        ergebnis += fn +": " + faecher[i].getName() + System.lineSeparator();
+                        ergebnis += print_helpMethod(i);
                     }
                 } break;
             default:
                 return showKuchenList();
         }
         return ergebnis;
+    }
+
+    String print_helpMethod(int i){
+        String erg="";
+        String fn = Integer.toString(faecher[i].getFachnummer());
+        if(faecher[i].getKuchen().getHaltbarkeit()!=null) {
+            erg = "Fach " + fn + ": " + faecher[i].getName() + ", Inspektions datum: " +
+                    faecher[i].getKuchen().getInspektionsdatum() + ", Haltbarkeit: " + faecher[i].getKuchen().getHaltbarkeit().toDays()
+                    + " Tagen" + System.lineSeparator();
+        }else{
+            erg = "Fach " + fn + ": " + faecher[i].getName() + ", Inspektions datum: " +
+                    faecher[i].getKuchen().getInspektionsdatum() + System.lineSeparator();
+        }
+        return erg;
     }
 
     public void updateKuchen(Verkaufskuchen kuchen, String name, int fachNummer) throws Exception {
@@ -210,12 +220,30 @@ public class Automat implements Serializable {
         for(int i=0; i<faecherAnzahl; i++){
             if(faecher[i]!=null){
                 if(faecher[i].getKuchen().getAllergene()!=null){
-                    erg += i+": " + faecher[i].getKuchen().getAllergene().toString() + System.lineSeparator();;
+                    erg += "Fachnummer " + i+": " + faecher[i].getKuchen().getAllergene().toString() + System.lineSeparator();;
                 }
             }
         }
         return erg;
     }
+
+    public String showNotIncludedAllergene(){
+        String erg="Not Included Allergies: " + System.lineSeparator();
+        Collection<Allergen> allergens = new LinkedList<>();
+        for(int i=0; i<faecherAnzahl; i++){
+            if(faecher[i]!=null){
+                if(faecher[i].getKuchen().getAllergene()!=null){
+                    allergens.addAll(faecher[i].getKuchen().getAllergene());
+                }
+            }
+        }
+        if(!allergens.contains(Allergen.Erdnuss)){ erg += "Erdnuss"+ System.lineSeparator(); }
+        if(!allergens.contains(Allergen.Gluten)){ erg += "Gluten"+ System.lineSeparator(); }
+        if(!allergens.contains(Allergen.Haselnuss)){ erg += "Haselnuss"+ System.lineSeparator();}
+        if(!allergens.contains(Allergen.Sesamsamen)){ erg += "Sesamsamen"+ System.lineSeparator(); }
+        return erg;
+    }
+
     public boolean isFull(){
         for(int i = 0; i<faecherAnzahl; i++) {
             if (faecher[i] == null){ return false; }
@@ -272,10 +300,6 @@ public class Automat implements Serializable {
         this.addKuchen(obstkuchen2, "fruit cake2");
         this.addKuchen(obsttorte, "fruit tart");
         this.addKuchen(obsttorte2, "fruit tart2");
-    }
-
-    public void setFaecherAnzahl(int faecherAnzahl) {
-        this.faecherAnzahl = faecherAnzahl;
     }
 
     public Mode getMode() {
