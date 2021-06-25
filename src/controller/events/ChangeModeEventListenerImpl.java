@@ -35,4 +35,8 @@ public class ChangeModeEventListenerImpl implements ChangeModeEventListener{
             System.out.println("Invalid input..");
         }
     }
+
+    public void setAutomat(Automat automat) {
+        this.automat = automat;
+    }
 }

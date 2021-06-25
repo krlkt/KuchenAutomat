@@ -1,13 +1,13 @@
 package controller.events;
 
 import geschaeftslogik.automat.*;
+import geschaeftslogik.persistence.JBP;
+import geschaeftslogik.persistence.JOS;
+import jdk.nashorn.internal.scripts.JO;
 
 import java.math.BigDecimal;
 import java.time.Duration;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Date;
-import java.util.LinkedList;
+import java.util.*;
 
 public class InputEventListenerImpl implements InputEventListener {
     Automat automat;
@@ -162,6 +162,26 @@ public class InputEventListenerImpl implements InputEventListener {
                     System.out.println("invalid input. type in locker number to update date of inspection");
                 }
             }else{
+                System.out.println("Invalid input");
+            }
+        }else if(automat.getMode()==Mode.Persistent) {
+            if (event.getText().equalsIgnoreCase("savejos")) {
+                JOS jos = new JOS();
+                jos.save(automat);
+            } else if (event.getText().equalsIgnoreCase("loadjos")) {
+                JOS jos = new JOS();
+                jos.load();
+            } else if (event.getText().equalsIgnoreCase("savejbp")) {
+                JBP jbp = new JBP();
+                try {
+                    jbp.save(automat);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if (event.getText().equalsIgnoreCase("loadjbp")) {
+                JBP jbp = new JBP();
+                jbp.load();
+            } else {
                 System.out.println("Invalid input");
             }
         }

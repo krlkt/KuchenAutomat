@@ -1,6 +1,8 @@
 package geschaeftslogik.automat;
 
-import java.io.Serializable;
+import java.io.*;
+import java.math.BigDecimal;
+import java.time.Duration;
 import java.util.*;
 
 public class Automat implements Serializable {
@@ -11,6 +13,8 @@ public class Automat implements Serializable {
     private Mode mode = Mode.Add; //default mode: Add
     private Fach[] faecher;
     private List<Hersteller> herstellerList = new ArrayList<>();
+
+    static final long serialVersionUID=1L;
 
     //Constructors
     public Automat(){}
@@ -278,6 +282,38 @@ public class Automat implements Serializable {
         this.herstellerList = herstellerList;
     }
 
+    public void setFaecherAnzahl(int faecherAnzahl) { this.faecherAnzahl = faecherAnzahl; }
+
+    //persistence
+    public static void serialize(String filename, Collection<Automat> items){
+        try (ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(filename))){
+            serialize(oos,items);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void serialize(ObjectOutput objectOutput, Collection<Automat> items) throws IOException {
+        objectOutput.writeObject(items);
+    }
+
+    public static Collection<Automat> deserialize(String filename){
+        try (ObjectInputStream ois=new ObjectInputStream(new FileInputStream(filename))){
+            return deserialize(ois);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static Collection<Automat> deserialize(ObjectInput objectInput) throws IOException, ClassNotFoundException {
+        return (Collection<Automat>)objectInput.readObject();
+    }
 
     //for testing purposes, fill the automat with 3 manufacturers and 6 cakes, 2 cakes for each type
     public void fillAutomat() throws Exception {
@@ -290,6 +326,15 @@ public class Automat implements Serializable {
         Kremkuchen kremkuchen2 = new KremkuchenImpl("cream2", hersteller);
         Obsttorte obsttorte = new ObsttorteImpl("erdbeer", "cream1", hersteller2);
         Obsttorte obsttorte2 = new ObsttorteImpl("banana", "cream2", hersteller2);
+        Collection<Allergen> Haselnuss = new ArrayList<>();
+        Haselnuss.add(Allergen.Haselnuss);
+        obsttorte.setAllergene(Haselnuss);
+        Collection<Allergen> Gluten = new ArrayList<>();
+        Haselnuss.add(Allergen.Gluten);
+        kremkuchen.setAllergene(Gluten);
+        Duration duration = Duration.ofDays(7);
+        obstkuchen.setHaltbarkeit(duration);
+        kremkuchen2.setPreis(BigDecimal.valueOf(5.5));
 
         this.addHersteller(hersteller);
         this.addHersteller(hersteller2);

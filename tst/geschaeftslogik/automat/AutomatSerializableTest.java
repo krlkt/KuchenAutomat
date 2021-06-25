@@ -16,11 +16,11 @@ class AutomatSerializableTest {
     @org.junit.jupiter.api.Test
     void serialize() {
         ObjectOutput oos=mock(ObjectOutput.class);
-        Collection<AutomatSerializable> items=new ArrayList<>();
-        items.add(mock(AutomatSerializable.class));
-        items.add(mock(AutomatSerializable.class));
+        Collection<Automat> items=new ArrayList<>();
+        items.add(mock(Automat.class));
+        items.add(mock(Automat.class));
         try {
-            AutomatSerializable.serialize(oos,items);
+            Automat.serialize(oos,items);
         } catch (IOException e) {
             e.printStackTrace();
             fail();
@@ -37,7 +37,7 @@ class AutomatSerializableTest {
     void deserialize() {
         ObjectInput objectInput=mock(ObjectInput.class);
         try {
-            Collection<AutomatSerializable> items=AutomatSerializable.deserialize(objectInput);
+            Collection<Automat> items=Automat.deserialize(objectInput);
         } catch (IOException e) {
             e.printStackTrace();
             fail();
