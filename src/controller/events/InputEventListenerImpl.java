@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.LinkedList;
 
 public class InputEventListenerImpl implements InputEventListener {
@@ -127,6 +128,41 @@ public class InputEventListenerImpl implements InputEventListener {
                 }
             }else {
                 System.out.println("Invalid command");
+            }
+        }else if(automat.getMode()==Mode.Delete){
+            if(str.length == 1){
+                if(str[0].matches("[0-9]+")){
+                    try {
+                        automat.eraseKuchen(Integer.parseInt(str[0]));
+                        System.out.println("successfully erased cake on locker " + str[0]);
+                    } catch (Exception e) {
+                        System.out.println("failed to erase cake from locker "+ str[0]);
+                    }
+                }else {
+                    if(automat.removeHersteller(str[0])){
+                        System.out.println("successfully removed hersteller " + str[0] + " from machine");
+                    }else {
+                        System.out.println("failed to remove hersteller "+ str[0] + " from machine");
+                    }
+                }
+            }else {
+                System.out.println("Invalid input");
+            }
+        }else if(automat.getMode()==Mode.Change){
+            if(str.length == 1){
+                if(str[0].matches("[0-9]+")) {
+                    int fachnummer = Integer.parseInt(str[0]);
+                    if(automat.getFaecher(fachnummer)!=null) {
+                        automat.getKuchen(fachnummer).setInspektionsdatum(new Date());
+                        System.out.println("updated date of inspection");
+                    }else{
+                        System.out.println("fachnummer " + fachnummer + " is empty..");
+                    }
+                }else {
+                    System.out.println("invalid input. type in locker number to update date of inspection");
+                }
+            }else{
+                System.out.println("Invalid input");
             }
         }
     }
