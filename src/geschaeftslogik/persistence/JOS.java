@@ -16,11 +16,12 @@ public class JOS {
         Automat.serialize("items.ser",items);
     }
 
-    public void load(){
+    public Automat load(){
+        Automat automat = new Automat(100);
         Collection<Automat> loadedItems= Automat.deserialize("items.ser");
         for (Automat i : loadedItems) {
-            System.out.println(Arrays.toString(i.showHerstellerList()));
-            System.out.println(i.showKuchenList());
+            automat = i;
         }
+        return automat;
     }
 }

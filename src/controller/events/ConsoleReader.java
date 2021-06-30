@@ -1,5 +1,7 @@
 package controller.events;
 
+import geschaeftslogik.automat.Mode;
+
 import java.util.Scanner;
 
 public class ConsoleReader {

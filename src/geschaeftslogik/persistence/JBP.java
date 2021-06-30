@@ -24,20 +24,18 @@ public class JBP {
             encoder.setPersistenceDelegate(ObstkuchenImpl.class,new DefaultPersistenceDelegate(new String[]{ "obstsorte", "hersteller" }) );
             encoder.setPersistenceDelegate(ObsttorteImpl.class,new DefaultPersistenceDelegate(new String[]{ "obstsorte","kremsorte","hersteller" }) );
             encoder.setPersistenceDelegate(HerstellerImpl.class,new DefaultPersistenceDelegate(new String[]{ "name" }) );
-            //encoder.setPersistenceDelegate(BigDecimal.class, new DefaultPersistenceDelegate(new String[]{"intVal"}));
-            //encoder.setPersistenceDelegate(Duration.class, new DefaultPersistenceDelegate(new String[]{"seconds"}));
 
             //TODO BIGDECIMAL UND DURATION
             
-            BeanInfo info = Introspector.getBeanInfo(Automat.class);
+            BeanInfo info = Introspector.getBeanInfo(Verkaufskuchen.class);
             for (PropertyDescriptor pd : info.getPropertyDescriptors()){
-                if(pd.getName().equals("herstellerList")){
-                    pd.setReadMethod(Automat.class.getMethod("getHerstellerList"));
-                    pd.setWriteMethod(Automat.class.getMethod("setHerstellerList", List.class));
+                if(pd.getName().equals("haltbarkeit")){
+                    pd.setReadMethod(Verkaufskuchen.class.getMethod("getHaltbarkeit"));
+                    pd.setWriteMethod(Verkaufskuchen.class.getMethod("setHaltbarkeit", Duration.class));
                 }
-                if(pd.getName().equals("faecher")){
-                    pd.setReadMethod(Automat.class.getMethod("getFaecher"));
-                    pd.setWriteMethod(Automat.class.getMethod("setFaecher", Fach[].class));
+                if(pd.getName().equals("preis")){
+                    pd.setReadMethod(Verkaufskuchen.class.getMethod("getPreis"));
+                    pd.setWriteMethod(Verkaufskuchen.class.getMethod("setPreis", BigDecimal.class));
                 }
             }
             encoder.writeObject(items);

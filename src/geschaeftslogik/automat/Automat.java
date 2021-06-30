@@ -347,6 +347,13 @@ public class Automat implements Serializable {
         this.addKuchen(obsttorte2, "fruit tart2");
     }
 
+    //method used for loading machine persistency
+    public void fillAutomat(Automat automat){
+        this.faecherAnzahl = automat.getFaecherAnzahl();
+        this.faecher = automat.getFaecher();
+        this.herstellerList = automat.getHerstellerList();
+    }
+
     public Mode getMode() {
         return mode;
     }
