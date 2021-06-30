@@ -4,11 +4,13 @@ import geschaeftslogik.automat.*;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.math.BigDecimal;
+
 public class lockedAutomatTest {
     lockedAutomat automat = new lockedAutomat(1000);
     Hersteller hersteller = new HerstellerImpl("hersteller");
-    Obstkuchen obstkuchenA = new ObstkuchenImpl("Erdbeeren, Kiwis", hersteller);
-    Obstkuchen obstkuchenB = new ObstkuchenImpl("Bananen, Mango", hersteller);
+    Obstkuchen obstkuchenA = new ObstkuchenImpl("Erdbeeren, Kiwis", hersteller, 500, 50, BigDecimal.valueOf(5.5));
+    Obstkuchen obstkuchenB = new ObstkuchenImpl("Bananen, Mango", hersteller, 500, 50, BigDecimal.valueOf(5.5));
 
     @Test
     public void locked_addKuchen() throws Exception {

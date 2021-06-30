@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collection;
@@ -14,8 +15,8 @@ public class AutomatTest {
     Automat automat = new Automat(100);
     Hersteller hersteller = new HerstellerImpl("hersteller");
 
-    Obstkuchen obstkuchenA = new ObstkuchenImpl("Erdbeeren, Kiwis", hersteller);
-    Obstkuchen obstkuchenB = new ObstkuchenImpl("Bananen, Mango", hersteller);
+    Obstkuchen obstkuchenA = new ObstkuchenImpl("Erdbeeren, Kiwis", hersteller, 500, 50, BigDecimal.valueOf(5.5));
+    Obstkuchen obstkuchenB = new ObstkuchenImpl("Bananen, Mango", hersteller, 500, 50, BigDecimal.valueOf(5.5));
 
     @Before
     public void addHerstellerToAutomat(){
@@ -97,15 +98,16 @@ public class AutomatTest {
     public void showKuchenOnAutomatWithType() throws Exception {
         automat.addKuchen(obstkuchenA, "obstkuchenA",5);
         automat.addKuchen(obstkuchenB, "obstkuchenB",99);
-        Kremkuchen kremB = new KremkuchenImpl("cream", hersteller);
+        Kremkuchen kremB = new KremkuchenImpl("cream", hersteller, 500, 50, BigDecimal.valueOf(5.5));
         automat.addKuchen(kremB, "kremkuchenB");
-        Obsttorte obsttorteA = new ObsttorteImpl("eredbeer", "cream", hersteller);
+        BigDecimal preis = BigDecimal.valueOf(5.5);
+        Obsttorte obsttorteA = new ObsttorteImpl("eredbeer", "cream", hersteller, 500, 50, preis);
         automat.addKuchen(obsttorteA, "obstorteA");
-        Obsttorte obsttorteB = new ObsttorteImpl("eredbeer", "cream", hersteller);
+        Obsttorte obsttorteB = new ObsttorteImpl("eredbeer", "cream", hersteller, 500, 50, preis);
         automat.addKuchen(obsttorteB, "obstorteB");
-        Obsttorte obsttorteC = new ObsttorteImpl("eredbeer", "cream", hersteller);
+        Obsttorte obsttorteC = new ObsttorteImpl("eredbeer", "cream", hersteller, 500, 50, preis);
         automat.addKuchen(obsttorteC, "obstorteC");
-        Kremkuchen kremA = new KremkuchenImpl("cream", hersteller);
+        Kremkuchen kremA = new KremkuchenImpl("cream", hersteller, 500, 50, BigDecimal.valueOf(5.5));
         automat.addKuchen(kremA, "kremkuchenA");
 
         System.out.println(automat.showKuchenList("obstkuchen"));

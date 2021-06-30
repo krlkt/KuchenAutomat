@@ -187,8 +187,8 @@ public class Automat implements Serializable {
         String fn = Integer.toString(faecher[i].getFachnummer());
         if(faecher[i].getKuchen().getHaltbarkeit()!=null) {
             erg = "Fach " + fn + ": " + faecher[i].getName() + ", Inspektions datum: " +
-                    faecher[i].getKuchen().getInspektionsdatum() + ", Haltbarkeit: " + faecher[i].getKuchen().getHaltbarkeit().toDays()
-                    + " Tagen" + System.lineSeparator();
+                    faecher[i].getKuchen().getInspektionsdatum() + ", Haltbarkeit: " + faecher[i].getKuchen().getHaltbarkeit().toHours()
+                    + " Stunden" + System.lineSeparator();
         }else{
             erg = "Fach " + fn + ": " + faecher[i].getName() + ", Inspektions datum: " +
                     faecher[i].getKuchen().getInspektionsdatum() + System.lineSeparator();
@@ -320,12 +320,13 @@ public class Automat implements Serializable {
         Hersteller hersteller = new HerstellerImpl("hersteller");
         Hersteller hersteller2 = new HerstellerImpl("hersteller2");
         Hersteller hersteller3 = new HerstellerImpl("hersteller3");
-        Obstkuchen obstkuchen = new ObstkuchenImpl("erdbeer", hersteller);
-        Obstkuchen obstkuchen2 = new ObstkuchenImpl("banana", hersteller);
-        Kremkuchen kremkuchen = new KremkuchenImpl("cream1", hersteller);
-        Kremkuchen kremkuchen2 = new KremkuchenImpl("cream2", hersteller);
-        Obsttorte obsttorte = new ObsttorteImpl("erdbeer", "cream1", hersteller2);
-        Obsttorte obsttorte2 = new ObsttorteImpl("banana", "cream2", hersteller2);
+        Obstkuchen obstkuchen = new ObstkuchenImpl("erdbeer", hersteller, 500, 50, BigDecimal.valueOf(5.5));
+        Obstkuchen obstkuchen2 = new ObstkuchenImpl("banana", hersteller, 500, 50, BigDecimal.valueOf(5.5));
+        Kremkuchen kremkuchen = new KremkuchenImpl("cream1", hersteller, 500, 50, BigDecimal.valueOf(5.5));
+        Kremkuchen kremkuchen2 = new KremkuchenImpl("cream2", hersteller, 500, 50, BigDecimal.valueOf(5.5));
+        BigDecimal preis = BigDecimal.valueOf(5.5);
+        Obsttorte obsttorte = new ObsttorteImpl("erdbeer", "cream1", hersteller2, 500, 50, preis);
+        Obsttorte obsttorte2 = new ObsttorteImpl("banana", "cream2", hersteller2, 500, 50, preis);
         Collection<Allergen> Haselnuss = new ArrayList<>();
         Haselnuss.add(Allergen.Haselnuss);
         obsttorte.setAllergene(Haselnuss);

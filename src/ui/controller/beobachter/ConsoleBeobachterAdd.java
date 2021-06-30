@@ -2,6 +2,8 @@ package ui.controller.beobachter;
 
 import geschaeftslogik.automat.*;
 
+import java.math.BigDecimal;
+
 public class ConsoleBeobachterAdd implements Beobachter{
     private ConsoleSubjekt consoleSubjekt;
     public ConsoleBeobachterAdd(ConsoleSubjekt cs){
@@ -33,7 +35,7 @@ public class ConsoleBeobachterAdd implements Beobachter{
                             String kremsorte = consoleSubjekt.s.next();
                             System.out.println("type in locker NUMBER you want to put the cake into: ");
                             int fachNummer = consoleSubjekt.s.nextInt();
-                            Verkaufskuchen kremkuchen = new KremkuchenImpl(kremsorte, dummyHersteller);
+                            Verkaufskuchen kremkuchen = new KremkuchenImpl(kremsorte, dummyHersteller, 500, 50, BigDecimal.valueOf(5.5));
                             try {
                                 consoleSubjekt.automat.addKuchen(kremkuchen, cakeName, fachNummer);
                                 System.out.println("added successfully. you will now be sent back to input mode");
@@ -49,7 +51,7 @@ public class ConsoleBeobachterAdd implements Beobachter{
                             String obstsorte = consoleSubjekt.s.next();
                             System.out.println("type in locker NUMBER you want to put the cake into: ");
                             int fachNummer = consoleSubjekt.s.nextInt();
-                            Verkaufskuchen obstkuchen = new KremkuchenImpl(obstsorte, dummy);
+                            Verkaufskuchen obstkuchen = new KremkuchenImpl(obstsorte, dummy, 500, 50, BigDecimal.valueOf(5.5));
                             try {
                                 consoleSubjekt.automat.addKuchen(obstkuchen, cakeName, fachNummer);
                                 System.out.println("added successfully. you will now be sent back to input mode");

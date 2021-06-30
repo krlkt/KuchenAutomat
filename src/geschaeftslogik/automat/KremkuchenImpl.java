@@ -14,7 +14,7 @@ public class KremkuchenImpl implements Kremkuchen, Serializable {
 
     Collection<Allergen> allergene;
     int naehrwert;      //in kcal pro 100g
-    Duration haltbarkeit;
+    Duration haltbarkeitAsHours;
 
     //Verkaufsobjekt Attribute
     BigDecimal preis;
@@ -23,10 +23,13 @@ public class KremkuchenImpl implements Kremkuchen, Serializable {
     String name="kremkuchen";
 
     //Constructors
-    public KremkuchenImpl(String kremsorte, Hersteller hersteller){
+    public KremkuchenImpl(String kremsorte, Hersteller hersteller, int naehrwert, long haltbarkeitAsHours, BigDecimal preis){
         this.kremsorte = kremsorte;
         this.inspektionsDatum = new Date();
         this.hersteller = hersteller;
+        this.naehrwert = naehrwert;
+        this.haltbarkeitAsHours = Duration.ofHours(haltbarkeitAsHours);
+        this.preis = preis;
     }
 
     //setter und getter
@@ -62,7 +65,7 @@ public class KremkuchenImpl implements Kremkuchen, Serializable {
 
     @Override
     public void setHaltbarkeit(Duration duration) {
-        this.haltbarkeit = duration;
+        this.haltbarkeitAsHours = duration;
     }
 
     @Override
@@ -75,9 +78,11 @@ public class KremkuchenImpl implements Kremkuchen, Serializable {
         return this.naehrwert;
     }
 
+    public long getHaltbarkeitToHours() { return haltbarkeitAsHours.toHours(); }
+
     @Override
     public Duration getHaltbarkeit() {
-        return this.haltbarkeit;
+        return this.haltbarkeitAsHours;
     }
 
     @Override

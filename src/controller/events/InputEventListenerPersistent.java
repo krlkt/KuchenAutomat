@@ -23,8 +23,8 @@ public class InputEventListenerPersistent implements InputEventListener{
                 System.out.println("successfully saved to items.ser");
             } else if (event.getText().equalsIgnoreCase("loadjos")) {
                 JOS jos = new JOS();
-                Automat load = jos.load();
-                automat.fillAutomat(load);
+                Automat loadedAutomat = jos.load();
+                automat.fillAutomat(loadedAutomat);
                 System.out.println("successfully loaded machine");
             } else if (event.getText().equalsIgnoreCase("savejbp")) {
                 JBP jbp = new JBP();
@@ -36,7 +36,8 @@ public class InputEventListenerPersistent implements InputEventListener{
                 }
             } else if (event.getText().equalsIgnoreCase("loadjbp")) {
                 JBP jbp = new JBP();
-                jbp.load();
+                Automat loadedAutomat = jbp.load();
+                automat.fillAutomat(loadedAutomat);
                 System.out.println("successfully loaded machine");
             } else {
                 System.out.println("Invalid input");

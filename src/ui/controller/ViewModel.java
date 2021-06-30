@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 public class ViewModel {
@@ -99,7 +100,7 @@ public class ViewModel {
                 warningLabel.setText("select hersteller name first!");
             }
             else {
-                Obsttorte ot = new ObsttorteImpl(fruitField.getText(), creamField.getText(), hersteller);
+                Obsttorte ot = new ObsttorteImpl(fruitField.getText(), creamField.getText(), hersteller, 500, 50, BigDecimal.valueOf(5.5));
                 if(automat.addKuchen(ot, "Obsttorte")){
                     System.out.println("added fruit tart to machine");
                     kuchenList.getItems().add("Fach: "+ ot.getFachnummer() + " " + ot.getName());
@@ -114,7 +115,7 @@ public class ViewModel {
                 warningLabel.setText("select hersteller name first!");
             }
             else {
-                Kremkuchen kk = new KremkuchenImpl(creamField.getText(), hersteller);
+                Kremkuchen kk = new KremkuchenImpl(creamField.getText(), hersteller, 500, 50, BigDecimal.valueOf(5.5));
                 if (automat.addKuchen(kk, "Kremkuchen")){
                     System.out.println("added creamcake to machine");
                     kuchenList.getItems().add("Fach: "+ kk.getFachnummer() + " " + kk.getName());
@@ -129,7 +130,7 @@ public class ViewModel {
                 warningLabel.setText("select hersteller name first!");
             }
             else {
-                Obstkuchen ok = new ObstkuchenImpl(fruitField.getText(), hersteller);
+                Obstkuchen ok = new ObstkuchenImpl(fruitField.getText(), hersteller, 500, 50, BigDecimal.valueOf(5.5));
                 if(automat.addKuchen(ok, "Obstkuchen")) {
                     System.out.println("added fruitcake to machine");
                     kuchenList.getItems().add("Fach: "+ ok.getFachnummer() + " " + ok.getName());

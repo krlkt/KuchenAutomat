@@ -1,11 +1,8 @@
 package controller.events;
 
 import geschaeftslogik.automat.*;
-import geschaeftslogik.persistence.JBP;
-import geschaeftslogik.persistence.JOS;
 
 import java.math.BigDecimal;
-import java.time.Duration;
 import java.util.*;
 
 public class InputEventListenerAdd implements InputEventListener {
@@ -31,7 +28,7 @@ public class InputEventListenerAdd implements InputEventListener {
                     Collection<Allergen> allergene = new LinkedList<>();
                     BigDecimal preis = BigDecimal.valueOf(0.0);
                     int naehrwert = 0;
-                    Duration durationDays = Duration.ofDays(0);
+                    long durationHours = 0;
                     if (str[0].equalsIgnoreCase("kremkuchen") || str[0].equalsIgnoreCase("obstkuchen")
                             || str[0].equalsIgnoreCase("obsttorte")) {
                         try {
@@ -46,8 +43,7 @@ public class InputEventListenerAdd implements InputEventListener {
                             System.out.println("Cannot parse forth input into naehrwert");
                         }
                         try {
-                            int days = Integer.parseInt(str[4]);
-                            durationDays = Duration.ofDays(days);
+                            durationHours = Long.parseLong(str[4]);
                         } catch (Exception e) {
                             System.out.println("Cannot parse fifth input into duration days");
                         }
@@ -74,22 +70,22 @@ public class InputEventListenerAdd implements InputEventListener {
                         }
                         if (str[0].equalsIgnoreCase("kremkuchen")){
                             if (str.length == 7) {
-                                Kremkuchen creamCake = new KremkuchenImpl(str[6], new HerstellerImpl(str[1]));
-                                createCake_HelpMethode(creamCake, allergene, preis, naehrwert, durationDays, "cream cake");
+                                Kremkuchen creamCake = new KremkuchenImpl(str[6], new HerstellerImpl(str[1]), naehrwert, durationHours, preis);
+                                createCake_HelpMethode(creamCake, allergene, preis, naehrwert, durationHours, "cream cake");
                             }else {
                                 System.out.println("invalid input length");
                             }
                         }else if(str[0].equalsIgnoreCase("obstkuchen")){
                             if(str.length == 7) {
-                                Obstkuchen fruitCake = new ObstkuchenImpl(str[6], new HerstellerImpl(str[1]));
-                                createCake_HelpMethode(fruitCake, allergene, preis, naehrwert, durationDays, "fruit cake");
+                                Obstkuchen fruitCake = new ObstkuchenImpl(str[6], new HerstellerImpl(str[1]), naehrwert, durationHours, preis);
+                                createCake_HelpMethode(fruitCake, allergene, preis, naehrwert, durationHours, "fruit cake");
                             }else {
                                 System.out.println("invalid input length");
                             }
                         }else if(str[0].equalsIgnoreCase("obsttorte")){
                             if(str.length == 8){
-                                Obsttorte obsttorte = new ObsttorteImpl(str[6], str[7], new HerstellerImpl(str[1]));
-                                createCake_HelpMethode(obsttorte, allergene, preis, naehrwert, durationDays, "fruit tart");
+                                Obsttorte obsttorte = new ObsttorteImpl(str[6], str[7], new HerstellerImpl(str[1]), naehrwert, durationHours, preis);
+                                createCake_HelpMethode(obsttorte, allergene, preis, naehrwert, durationHours, "fruit tart");
                             }else {
                                 System.out.println("invalid input length");
                             }
@@ -104,15 +100,12 @@ public class InputEventListenerAdd implements InputEventListener {
         }
     }
 
-    void createCake_HelpMethode(Verkaufskuchen kuchen, Collection<Allergen> allergene, BigDecimal preis, int naehrwert, Duration durationDays, String name){
+    void createCake_HelpMethode(Verkaufskuchen kuchen, Collection<Allergen> allergene, BigDecimal preis, int naehrwert, long durationHours, String name){
         kuchen.setAllergene(allergene);
         System.out.println("set cake allergene to "+ allergene);
-        kuchen.setPreis(preis);
         System.out.println("set cake price to " + preis);
-        kuchen.setNaehrwert(naehrwert);
         System.out.println("set naehrwert to " + naehrwert + " kcal");
-        kuchen.setHaltbarkeit(durationDays);
-        System.out.println("set haltbarkeit to " + durationDays.toDays() + " days");
+        System.out.println("set haltbarkeit to " + durationHours + " hours");
         try {
             if(automat.addKuchen(kuchen, name)){ System.out.println("successfully added cream cake to the machine"); }
         } catch (Exception e) {

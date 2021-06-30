@@ -13,7 +13,7 @@ public class ObstkuchenImpl implements Obstkuchen, Serializable {
     Hersteller hersteller;
     Collection<Allergen> allergene;
     int naehrwert;      //in kcal pro 100g
-    Duration haltbarkeit;
+    Duration haltbarkeitAsHours;
 
     //Verkaufsobjekt Attribute
     BigDecimal preis;
@@ -22,10 +22,13 @@ public class ObstkuchenImpl implements Obstkuchen, Serializable {
     String name="obstkuchen";
 
     //Constructors
-    public ObstkuchenImpl(String obstsorte, Hersteller hersteller){
+    public ObstkuchenImpl(String obstsorte, Hersteller hersteller, int naehrwert, long haltbarkeitAsHours, BigDecimal preis){
         this.obstsorte = obstsorte;
         this.inspektionsDatum = new Date();
         this.hersteller = hersteller;
+        this.haltbarkeitAsHours = Duration.ofHours(haltbarkeitAsHours);
+        this.naehrwert = naehrwert;
+        this.preis = preis;
     }
 
     //getter
@@ -61,7 +64,7 @@ public class ObstkuchenImpl implements Obstkuchen, Serializable {
 
     @Override
     public Duration getHaltbarkeit() {
-        return haltbarkeit;
+        return haltbarkeitAsHours;
     }
 
     @Override
@@ -74,7 +77,7 @@ public class ObstkuchenImpl implements Obstkuchen, Serializable {
         return inspektionsDatum;
     }
 
-
+    public long getHaltbarkeitToHours() { return haltbarkeitAsHours.toHours(); }
 
     @Override
     public int getFachnummer() {
@@ -94,9 +97,8 @@ public class ObstkuchenImpl implements Obstkuchen, Serializable {
         this.naehrwert = naehrwert;
     }
 
-    public void setHaltbarkeit(Duration haltbarkeit) {
-        this.haltbarkeit = haltbarkeit;
-    }
+    public void setHaltbarkeit(Duration haltbarkeit) { this.haltbarkeitAsHours = haltbarkeit; }
+
 
     public void setPreis(BigDecimal preis) {
         this.preis = preis;
