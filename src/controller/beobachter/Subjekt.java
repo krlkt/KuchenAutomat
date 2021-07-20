@@ -1,4 +1,4 @@
-package ui.controller.beobachter;
+package controller.beobachter;
 
 public interface Subjekt {
     void meldeAn(Beobachter b);

@@ -20,6 +20,7 @@ public class lockedAutomat extends Automat {
         super(faecherAnzahl);
     }
 
+    //Methoden für Simulation 1
     public void locked_addKuchen(Verkaufskuchen kuchen, String name, int fachNummer) throws Exception {
         this.lock.lock();       //entering kritische Bereich
         try {
@@ -48,6 +49,7 @@ public class lockedAutomat extends Automat {
         }
     }
 
+    //Methoden für Simulation 2
     public synchronized void locked_addKuchen2(Verkaufskuchen kuchen, String name, int fachNummer) throws Exception {
         while(!adding) wait();
         if(null!=this.getFaecher(fachNummer))
@@ -68,14 +70,12 @@ public class lockedAutomat extends Automat {
         notifyAll();
     }
 
-    public synchronized Verkaufskuchen locked_inspectKuchen(int fachNummer) throws InterruptedException {
-        while(inspectedList.size() > 10) wait();
-        if (null != this.getFaecher(fachNummer)) {
-            Date date = new Date();
-            this.getKuchen(fachNummer).setInspektionsdatum(date);
-            inspectedList.add(fachNummer);
+    public boolean locked_inspectKuchen(int fachNummer) {
+        if (null == this.getFaecher(fachNummer)) {
+            return false;
         }
-        notifyAll();
-        return this.getKuchen(fachNummer);
+        Date date = new Date();
+        this.getKuchen(fachNummer).setInspektionsdatum(date);
+        return true;
     }
 }

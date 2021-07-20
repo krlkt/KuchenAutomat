@@ -25,18 +25,8 @@ public class InputEventListenerShow implements InputEventListener{
                 } else {
                     System.out.println(automat.showKuchenList(str[1]));
                 }
-            } else if (str[0].equalsIgnoreCase("allergene")) {
-                if (str.length > 1) {
-                    if (str[1].equalsIgnoreCase("i")) {
-                        System.out.println(automat.showAllergene());
-                    } else if (str[1].equalsIgnoreCase("e")) {
-                        System.out.println(automat.showNotIncludedAllergene());
-                    } else {
-                        System.out.println("Invalid command. After allergene type i for included allergies and e for not included");
-                    }
-                } else {
-                    System.out.println("Invalid input length. After allergene type i for included allergies and e for not included");
-                }
+            } else if (str[0].equalsIgnoreCase("allergene")){
+                //will be handled by InputEventListenerShowAllergene
             } else {
                 System.out.println("Invalid command");
             }

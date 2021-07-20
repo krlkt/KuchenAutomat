@@ -5,16 +5,14 @@ import geschaeftslogik.automat.*;
 import java.beans.*;
 import java.io.*;
 import java.math.BigDecimal;
-import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class JBP {
     public JBP(){
     }
 
-    public void save(Automat automat) throws Exception {
+    public void save(Automat automat) {
         ArrayList<Automat> items=new ArrayList<>();
         items.add(automat);
         try(XMLEncoder encoder=new XMLEncoder(new BufferedOutputStream(new FileOutputStream("JBP.xml")));){
@@ -34,18 +32,6 @@ public class JBP {
                     });
                 }protected boolean mutatesTo(Object oldInstance, Object newInstance) { return oldInstance.equals(newInstance); }
             });
-//
-//            BeanInfo info = Introspector.getBeanInfo(Verkaufskuchen.class);
-//            for (PropertyDescriptor pd : info.getPropertyDescriptors()){
-//                if(pd.getName().equals("haltbarkeit")){
-//                    pd.setReadMethod(Verkaufskuchen.class.getMethod("getHaltbarkeit"));
-//                    pd.setWriteMethod(Verkaufskuchen.class.getMethod("setHaltbarkeit", Duration.class));
-//                }
-//                if(pd.getName().equals("preis")){
-//                    pd.setReadMethod(Verkaufskuchen.class.getMethod("getPreis"));
-//                    pd.setWriteMethod(Verkaufskuchen.class.getMethod("setPreis", BigDecimal.class));
-//                }
-//            }
             encoder.writeObject(items);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -56,8 +42,6 @@ public class JBP {
         try (XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream("JBP.xml")));) {
             List<Automat> loadedList = (List<Automat>) decoder.readObject();
             for (Automat i : loadedList) {
-                System.out.println(Arrays.toString(i.showHerstellerList()));
-                System.out.println(i.showKuchenList());
                 automat = i;
             }
         } catch (FileNotFoundException e) {

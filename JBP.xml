@@ -3,7 +3,7 @@
  <object class="java.util.ArrayList">
   <void method="add">
    <object class="geschaeftslogik.automat.Automat" id="Automat0">
-    <int>100</int>
+    <int>10</int>
     <void property="faecher">
      <void index="0">
       <object class="geschaeftslogik.automat.FachImpl">
@@ -22,14 +22,14 @@
         </void>
         <void property="inspektionsdatum">
          <object class="java.util.Date">
-          <long>1625063776357</long>
+          <long>1625590656308</long>
          </object>
         </void>
         <void property="name">
-         <string>cream cake: cream1: cream1</string>
+         <string>cream cake: cream1</string>
         </void>
        </object>
-       <string>cream cake: cream1: cream1</string>
+       <string>cream cake: cream1</string>
       </object>
      </void>
      <void index="1">
@@ -47,14 +47,14 @@
         </void>
         <void property="inspektionsdatum">
          <object class="java.util.Date">
-          <long>1625063776358</long>
+          <long>1625590656309</long>
          </object>
         </void>
         <void property="name">
-         <string>cream cake2: cream2: cream2</string>
+         <string>cream cake2: cream2</string>
         </void>
        </object>
-       <string>cream cake2: cream2: cream2</string>
+       <string>cream cake2: cream2</string>
       </object>
      </void>
      <void index="2">
@@ -72,14 +72,14 @@
         </void>
         <void property="inspektionsdatum">
          <object class="java.util.Date">
-          <long>1625063776358</long>
+          <long>1625590656309</long>
          </object>
         </void>
         <void property="name">
-         <string>fruit cake: erdbeer: erdbeer</string>
+         <string>fruit cake: erdbeer</string>
         </void>
        </object>
-       <string>fruit cake: erdbeer: erdbeer</string>
+       <string>fruit cake: erdbeer</string>
       </object>
      </void>
      <void index="3">
@@ -97,14 +97,14 @@
         </void>
         <void property="inspektionsdatum">
          <object class="java.util.Date">
-          <long>1625063776358</long>
+          <long>1625590656309</long>
          </object>
         </void>
         <void property="name">
-         <string>fruit cake2: banana: banana</string>
+         <string>fruit cake2: banana</string>
         </void>
        </object>
-       <string>fruit cake2: banana: banana</string>
+       <string>fruit cake2: banana</string>
       </object>
      </void>
      <void index="4">
@@ -129,7 +129,7 @@
            </object>
           </void>
           <void method="add">
-           <object class="java.lang.Enum" id="Allergen0" method="valueOf">
+           <object class="java.lang.Enum" method="valueOf">
             <class>geschaeftslogik.automat.Allergen</class>
             <string>Gluten</string>
            </object>
@@ -141,14 +141,14 @@
         </void>
         <void property="inspektionsdatum">
          <object class="java.util.Date">
-          <long>1625063776358</long>
+          <long>1625590656309</long>
          </object>
         </void>
         <void property="name">
-         <string>fruit tart: erdbeer, cream1: erdbeer, cream1</string>
+         <string>fruit tart: erdbeer, cream1</string>
         </void>
        </object>
-       <string>fruit tart: erdbeer, cream1: erdbeer, cream1</string>
+       <string>fruit tart: erdbeer, cream1</string>
       </object>
      </void>
      <void index="5">
@@ -165,54 +165,14 @@
         </void>
         <void property="inspektionsdatum">
          <object class="java.util.Date">
-          <long>1625063776358</long>
+          <long>1625590656309</long>
          </object>
         </void>
         <void property="name">
-         <string>fruit tart2: banana, cream2: banana, cream2</string>
+         <string>fruit tart2: banana, cream2</string>
         </void>
        </object>
-       <string>fruit tart2: banana, cream2: banana, cream2</string>
-      </object>
-     </void>
-     <void index="6">
-      <object class="geschaeftslogik.automat.FachImpl">
-       <object class="geschaeftslogik.automat.ObstkuchenImpl">
-        <string>egal</string>
-        <object class="geschaeftslogik.automat.HerstellerImpl">
-         <string>andy</string>
-        </object>
-        <int>333</int>
-        <long>333</long>
-        <object class="java.math.BigDecimal">
-         <string>3.33</string>
-        </object>
-        <void property="allergene">
-         <object class="java.util.LinkedList">
-          <void method="add">
-           <object idref="Allergen0"/>
-          </void>
-          <void method="add">
-           <object class="java.lang.Enum" method="valueOf">
-            <class>geschaeftslogik.automat.Allergen</class>
-            <string>Sesamsamen</string>
-           </object>
-          </void>
-         </object>
-        </void>
-        <void property="fachnummer">
-         <int>6</int>
-        </void>
-        <void property="inspektionsdatum">
-         <object class="java.util.Date">
-          <long>1625064071782</long>
-         </object>
-        </void>
-        <void property="name">
-         <string>fruit cake: egal</string>
-        </void>
-       </object>
-       <string>fruit cake: egal</string>
+       <string>fruit tart2: banana, cream2</string>
       </object>
      </void>
     </void>
@@ -228,22 +188,6 @@
        <string>hersteller3</string>
       </object>
      </void>
-     <void method="add">
-      <object class="geschaeftslogik.automat.HerstellerImpl">
-       <string>oatker</string>
-      </object>
-     </void>
-     <void method="add">
-      <object class="geschaeftslogik.automat.HerstellerImpl">
-       <string>andy</string>
-      </object>
-     </void>
-    </void>
-    <void property="mode">
-     <object class="java.lang.Enum" method="valueOf">
-      <class>geschaeftslogik.automat.Mode</class>
-      <string>Persistent</string>
-     </object>
     </void>
    </object>
   </void>

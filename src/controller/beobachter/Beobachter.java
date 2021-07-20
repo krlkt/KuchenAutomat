@@ -1,4 +1,4 @@
-package ui.controller.beobachter;
+package controller.beobachter;
 
 public interface Beobachter {
     void aktualisiere();

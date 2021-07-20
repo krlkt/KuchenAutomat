@@ -3,7 +3,6 @@ package geschaeftslogik.automat;
 import java.io.Serializable;
 
 public class FachImpl implements Fach, Serializable {
-    int fachNummer;
     Verkaufskuchen kuchen;
 
     //Constructors

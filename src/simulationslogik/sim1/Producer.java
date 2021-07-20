@@ -19,8 +19,10 @@ public class Producer extends Thread{
         while (true) {
                 if (!this.automat.isFull()) {
                     try {
-                        this.automat.locked_addKuchen(Util.list.get(random.nextInt(4)), "egal", randomFachnummer.nextInt(automat.getFaecherAnzahl()));
-                        System.out.println("added a cake");
+                        int i = random.nextInt(6);
+                        int j = randomFachnummer.nextInt(automat.getFaecherAnzahl());
+                        this.automat.locked_addKuchen(Util.list.get(i), "kuchen", j);
+                        System.out.println(Thread.currentThread() + ": added cake " + Util.list.get(i).getName() + " to locker number " + j);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

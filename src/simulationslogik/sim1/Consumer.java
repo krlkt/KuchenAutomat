@@ -14,7 +14,9 @@ public class Consumer extends Thread{
     public void run(){
             while (true) {
                 try {
-                    System.out.println("removed cake: " + this.automat.locked_eraseKuchen(random.nextInt(automat.getFaecherAnzahl())));
+                    int i = random.nextInt(automat.getFaecherAnzahl());
+                    this.automat.locked_eraseKuchen(i);
+                    System.out.println(Thread.currentThread() + ": removed cake on locker " + i);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

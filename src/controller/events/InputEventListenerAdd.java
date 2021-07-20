@@ -25,7 +25,7 @@ public class InputEventListenerAdd implements InputEventListener {
                 }
             } else {
                 if (str.length == 7 || str.length == 8) {
-                    Collection<Allergen> allergene = new LinkedList<>();
+                    Collection<Allergen> allergene = null;
                     BigDecimal preis = BigDecimal.valueOf(0.0);
                     int naehrwert = 0;
                     long durationHours = 0;
@@ -50,18 +50,21 @@ public class InputEventListenerAdd implements InputEventListener {
                         try {
                             if(!str[5].equalsIgnoreCase(",")) {
                                 String[] allergen = str[5].split(",", 4);
-                                for (int i = 0; i < allergen.length; i++) {
-                                    if (allergen[i].equalsIgnoreCase("gluten")) {
-                                        allergene.add(Allergen.Gluten);
-                                    } else if (allergen[i].equalsIgnoreCase("sesamsamen")) {
-                                        allergene.add(Allergen.Sesamsamen);
-                                    } else if (allergen[i].equalsIgnoreCase("erdnuss")) {
-                                        allergene.add(Allergen.Erdnuss);
-                                    } else if (allergen[i].equalsIgnoreCase("haselnuss")) {
-                                        allergene.add(Allergen.Haselnuss);
-                                    } else {
-                                        System.out.println("failed to read alergies");
-                                        return;
+                                if(allergen.length > 0) {
+                                    allergene = new LinkedList<>();
+                                    for (int i = 0; i < allergen.length; i++) {
+                                        if (allergen[i].equalsIgnoreCase("gluten")) {
+                                            allergene.add(Allergen.Gluten);
+                                        } else if (allergen[i].equalsIgnoreCase("sesamsamen")) {
+                                            allergene.add(Allergen.Sesamsamen);
+                                        } else if (allergen[i].equalsIgnoreCase("erdnuss")) {
+                                            allergene.add(Allergen.Erdnuss);
+                                        } else if (allergen[i].equalsIgnoreCase("haselnuss")) {
+                                            allergene.add(Allergen.Haselnuss);
+                                        } else {
+                                            System.out.println("failed to read alergies");
+                                            return;
+                                        }
                                     }
                                 }
                             }
@@ -101,8 +104,10 @@ public class InputEventListenerAdd implements InputEventListener {
     }
 
     void createCake_HelpMethode(Verkaufskuchen kuchen, Collection<Allergen> allergene, BigDecimal preis, int naehrwert, long durationHours, String name){
-        kuchen.setAllergene(allergene);
-        System.out.println("set cake allergene to "+ allergene);
+        if(allergene!= null) {
+            kuchen.setAllergene(allergene);
+            System.out.println("set cake allergene to " + allergene);
+        }
         System.out.println("set cake price to " + preis);
         System.out.println("set naehrwert to " + naehrwert + " kcal");
         System.out.println("set haltbarkeit to " + durationHours + " hours");

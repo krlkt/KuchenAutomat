@@ -1,11 +1,14 @@
 package geschaeftslogik.automat;
 
+import controller.beobachter.Beobachter;
+import controller.beobachter.Subjekt;
+
 import java.io.*;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.*;
 
-public class Automat implements Serializable {
+public class Automat implements Serializable, Subjekt {
     /**
      * Anzahl von faecher musst bei der Erstellung von Automat eingegeben werden
      */
@@ -72,7 +75,7 @@ public class Automat implements Serializable {
         return erg;
     }
 
-    int kuchenAnzahl(Hersteller hersteller){ //TODO: schoener?
+    int kuchenAnzahl(Hersteller hersteller){
         int count=0;
         for(int i=0; i<faecherAnzahl; i++){
             if(faecher[i]!=null){
@@ -248,6 +251,14 @@ public class Automat implements Serializable {
         return erg;
     }
 
+    public int getCakeInAutomat(){
+        int count=0;
+        for(int i=0; i<faecherAnzahl; i++){
+            if(faecher[i] != null){ count++; }
+        }
+        return count;
+    }
+
     public boolean isFull(){
         for(int i = 0; i<faecherAnzahl; i++) {
             if (faecher[i] == null){ return false; }
@@ -277,12 +288,6 @@ public class Automat implements Serializable {
     public Fach[] getFaecher() {
         return faecher;
     }
-
-    public void setHerstellerList(List<Hersteller> herstellerList) {
-        this.herstellerList = herstellerList;
-    }
-
-    public void setFaecherAnzahl(int faecherAnzahl) { this.faecherAnzahl = faecherAnzahl; }
 
     //persistence
     public static void serialize(String filename, Collection<Automat> items){
@@ -346,6 +351,19 @@ public class Automat implements Serializable {
         this.addKuchen(obstkuchen2, "fruit cake2");
         this.addKuchen(obsttorte, "fruit tart");
         this.addKuchen(obsttorte2, "fruit tart2");
+    }
+
+
+    //Beobachter
+    private List<Beobachter> beobachterList = new LinkedList<>();
+    @Override public void meldeAn(Beobachter beobachter) {
+        this.beobachterList.add(beobachter);
+    }
+    @Override public void meldeAb(Beobachter beobachter) {
+        this.beobachterList.remove(beobachter);
+    }
+    @Override public void benachrichtige() {
+        for (Beobachter beobachter : beobachterList) beobachter.aktualisiere();
     }
 
     //method used for loading machine persistency

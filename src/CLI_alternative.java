@@ -1,11 +1,11 @@
-import controller.beobachter.AllergeneBeobachter;
+import controller.beobachter.FastVollBeobachter;
 import controller.events.*;
 import geschaeftslogik.automat.Automat;
-import controller.beobachter.FastVollBeobachter;
 
-public class CLI {
+public class CLI_alternative {
+    //Lösch und Allergene Auflisten Funktionalitäten sind deaktiviert und nur ein Beobachter ->
+    //(Meldung bei mehr als 90% gelegte kuchen im automat) ist aktiv
     private static int arg = 100;
-
     public static void main(String[] args) {
         if(args.length == 1) {
             try {
@@ -30,20 +30,15 @@ public class CLI {
 
         InputEventListener inputEventListenerAdd = new InputEventListenerAdd(automat);
         InputEventListener inputEventListenerChange = new InputEventListenerChange(automat);
-        InputEventListener inputEventListenerDelete = new InputEventListenerDelete(automat);
         InputEventListener inputEventListenerPersistent = new InputEventListenerPersistent(automat);
         InputEventListener inputEventListenerShow = new InputEventListenerShow(automat);
-        InputEventListener inputEventListenerShowAllergene = new InputEventListenerShowAllergene(automat);
         handler.add(inputEventListenerAdd);
         handler.add(inputEventListenerChange);
-        handler.add(inputEventListenerDelete);
         handler.add(inputEventListenerPersistent);
         handler.add(inputEventListenerShow);
-        handler.add(inputEventListenerShowAllergene);
 
         //Beobachter
         new FastVollBeobachter(c.getAutomat());
-        new AllergeneBeobachter(c.getAutomat());
 
         //start
         c.setChangeModeEventHandler(cmHandler);

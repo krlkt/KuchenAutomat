@@ -18,14 +18,12 @@ public class Producer2 extends Thread{
     @Override
     public void run() {
         while (true) {
-            synchronized (this.automat) {
-                if (!this.automat.isFull()) {
-                    try {
-                        this.automat.locked_addKuchen2(Util.list.get(random.nextInt(4)), "egal", counter++%automat.getFaecherAnzahl());
-                        System.out.println("added a cake");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+            if (!this.automat.isFull()) {
+                try {
+                    this.automat.locked_addKuchen2(Util.list.get(random.nextInt(4)), "egal", counter++ % automat.getFaecherAnzahl());
+                    System.out.println("added a cake");
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }

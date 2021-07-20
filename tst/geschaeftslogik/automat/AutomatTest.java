@@ -211,4 +211,12 @@ public class AutomatTest {
         System.out.println(automat.showNotIncludedAllergene());
     }
 
+    @Test
+    public void getCakeInAutomat() throws Exception {
+        automat.fillAutomat();
+        automat.addKuchen(obstkuchenA, "obstkuchenA");
+        automat.addKuchen(obstkuchenB, "obstkuchenB");
+        Assert.assertEquals(automat.getCakeInAutomat(), 8);
+    }
+
 }

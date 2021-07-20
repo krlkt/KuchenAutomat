@@ -16,7 +16,10 @@ public class Inspector extends Thread{
             synchronized (this.automat) {
 
                 try {
-                    System.out.println("inspected cake: " + this.automat.locked_inspectKuchen(random.nextInt(automat.getFaecherAnzahl())));
+                    int i = random.nextInt(automat.getFaecherAnzahl());
+                    if(this.automat.locked_inspectKuchen(i)) {
+                        System.out.println("inspected cake on locker number " + i);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
