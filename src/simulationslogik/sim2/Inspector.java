@@ -13,17 +13,16 @@ public class Inspector extends Thread{
 
     public void run(){
         while (true) {
-            synchronized (this.automat) {
-
                 try {
                     int i = random.nextInt(automat.getFaecherAnzahl());
                     if(this.automat.locked_inspectKuchen(i)) {
-                        System.out.println("inspected cake on locker number " + i);
+                        //System.out.println("inspected cake on locker number " + i);
+                        //wird kommentiert, da sonst wird auf der Console fast nur Zeilen von Inspector geprintet.
+                        //weil die Laufzeit von Inspector viel schneller ist als Producer2 und Consumer2
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }
         }
     }
 }

@@ -14,14 +14,12 @@ public class Consumer2 extends Thread {
 
     public void run(){
         while (true) {
-            synchronized (this.automat) {
-
-                try {
-                    this.automat.locked_eraseKuchen2();
-                    System.out.println("removed a cake");
-                } catch (Exception e) {
-                    e.printStackTrace();
+            try {
+                if(this.automat.locked_eraseKuchen2()) {
+                    System.out.println("removed cake");
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
