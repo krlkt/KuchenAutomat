@@ -54,6 +54,7 @@ public class lockedAutomatTest {
         automat.locked_eraseKuchen2();
         Thread.sleep(10);
         automat.locked_eraseKuchen2();
+
         Assert.assertEquals(null, this.automat.getFaecher(0));
         Assert.assertEquals(null, this.automat.getFaecher(1));
     }

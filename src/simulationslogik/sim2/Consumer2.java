@@ -7,7 +7,6 @@ import java.util.Random;
 
 public class Consumer2 extends Thread {
     private final lockedAutomat automat;
-    private Random random = new Random(77);
     public Consumer2(lockedAutomat automat){
         this.automat = automat;
     }
@@ -15,8 +14,9 @@ public class Consumer2 extends Thread {
     public void run(){
         while (true) {
             try {
-                if(this.automat.locked_eraseKuchen2()) {
-                    System.out.println("removed cake");
+                int i = this.automat.locked_eraseKuchen2();
+                if(i != -1) {
+                    System.out.println("removed cake from locker " + i);
                 }
             } catch (Exception e) {
                 e.printStackTrace();

@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 
 public class simulation2 {
     public static void main(String[] args) throws Exception {
-        lockedAutomat automat = new lockedAutomat(10);
+        lockedAutomat automat = new lockedAutomat(100);
         automat.addHersteller("hersteller");
 
         new Producer2(automat).start();

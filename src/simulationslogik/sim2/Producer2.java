@@ -19,7 +19,7 @@ public class Producer2 extends Thread{
         while (true) {
             if (!this.automat.isFull()) {
                 try {
-                    int j = randomFachnummer.nextInt(10);
+                    int j = randomFachnummer.nextInt(automat.getFaecherAnzahl());
                     if(this.automat.locked_addKuchen2(Util.list.get(random.nextInt(4)), "kuchen", j)) {
                         System.out.println("added cake to locker number " + j);
                     }

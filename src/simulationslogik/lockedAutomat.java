@@ -51,20 +51,20 @@ public class lockedAutomat extends Automat {
         }
     }
 
-    public boolean locked_eraseKuchen2() throws Exception {
+    public int locked_eraseKuchen2() throws Exception {
         this.lock.lock();       //entering kritische Bereich
         try {
             while(adding) this.automatFull.await();
             int oldestDate = this.getOldestDate();
             if(null==this.getFaecher(oldestDate)){
-                return false;
+                return -1;
             }
             locked_eraseKuchen(oldestDate);
             if(this.isEmpty()){
                 adding = true;
                 this.automatEmpty.signal();
             }
-            return true;
+            return oldestDate;
         }finally {
             this.lock.unlock();
         }
