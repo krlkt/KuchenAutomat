@@ -94,4 +94,40 @@ public class lockedAutomat extends Automat {
         this.getKuchen(fachNummer).setInspektionsdatum(date);
         return true;
     }
+
+    //Methoden für Simulation 3
+    public boolean locked_addKuchen3(Verkaufskuchen kuchen, String name, int fachNummer) throws Exception {
+        this.lock.lock();       //entering kritische Bereich
+        try {
+            if(null!=this.getFaecher(fachNummer)) return false;
+            locked_addKuchen(kuchen, name, fachNummer);
+            return true;
+        }finally {
+            this.lock.unlock();
+        }
+    }
+
+    public int locked_eraseKuchen3(int Anzahl) throws Exception {
+        this.lock.lock();       //entering kritische Bereich
+        int counter=0;
+        try {
+            while(adding) this.automatFull.await();
+            for(int i=0;i<Anzahl;i++) {
+                int oldestDate = this.getOldestDate();
+                if (null == this.getFaecher(oldestDate)) {
+                    //counter stays
+                }else {
+                    locked_eraseKuchen(oldestDate);
+                    counter++;
+                    if(this.isEmpty()){
+                        adding = true;
+                        this.automatEmpty.signal();
+                    }
+                }
+            }
+        }finally {
+            this.lock.unlock();
+        }
+        return counter;
+    }
 }

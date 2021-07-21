@@ -14,8 +14,8 @@ public class simulation2 {
         lockedAutomat automat = new lockedAutomat(100);
         automat.addHersteller("hersteller");
 
-        new Producer2(automat).start();
+        for(int i=0;i<10;i++) new Producer2(automat).start();
         new Inspector(automat).start();
-        new Consumer2(automat).start();
+        for(int i=0;i<10;i++) new Consumer2(automat).start();
     }
 }

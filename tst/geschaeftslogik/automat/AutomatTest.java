@@ -216,7 +216,7 @@ public class AutomatTest {
         automat.fillAutomat();
         automat.addKuchen(obstkuchenA, "obstkuchenA");
         automat.addKuchen(obstkuchenB, "obstkuchenB");
-        Assert.assertEquals(automat.getCakeInAutomat(), 8);
+        Assert.assertEquals(automat.kuchenAnzahlInAutomat(), 8);
     }
 
 }

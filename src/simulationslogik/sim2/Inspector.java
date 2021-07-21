@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Inspector extends Thread{
     private final lockedAutomat automat;
-    private Random random = new Random();
+    private Random random = new Random(77);
     public Inspector(lockedAutomat automat){
         this.automat = automat;
     }

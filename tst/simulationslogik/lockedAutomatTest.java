@@ -3,10 +3,7 @@ package simulationslogik;
 import geschaeftslogik.automat.*;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
-
 import java.math.BigDecimal;
-import java.util.Date;
 
 public class lockedAutomatTest {
     lockedAutomat automat = new lockedAutomat(4);
@@ -67,5 +64,21 @@ public class lockedAutomatTest {
 
         Assert.assertEquals(automat.getKuchen(0), obstkuchenA);
         Assert.assertEquals(automat.getKuchen(1), obstkuchenB);
+    }
+
+    @Test
+    public void locked_eraseKuchen3() throws Exception {
+        automat.addHersteller(hersteller);
+        automat.locked_addKuchen2(obstkuchenA, "obsA", 0);
+        Thread.sleep(1);
+        automat.locked_addKuchen2(obstkuchenB, "obsB", 1);
+        Thread.sleep(1);
+        automat.locked_addKuchen2(obstkuchenB, "obsB", 2);
+        Thread.sleep(1);
+        automat.locked_addKuchen2(obstkuchenA, "obsA", 3);
+        Thread.sleep(1);
+        automat.locked_eraseKuchen3(4); //erase 4 Kuchen vom Automat
+
+        Assert.assertEquals(automat.kuchenAnzahlInAutomat(), 0);    //sollte 0 übrig sein
     }
 }

@@ -1,5 +1,4 @@
 package controller.beobachter;
-import controller.events.Console;
 import geschaeftslogik.automat.Automat;
 
 public class FastVollBeobachter implements Beobachter{
@@ -11,7 +10,7 @@ public class FastVollBeobachter implements Beobachter{
 
     @Override
     public void aktualisiere() {
-        double d = (double) automat.getCakeInAutomat() / automat.getFaecherAnzahl();
+        double d = (double) automat.kuchenAnzahlInAutomat() / automat.getFaecherAnzahl();
         double percent = d*100;
         if( d > 0.9){
             System.out.println("Machine is (almost) full. Current percentage: " + percent + "%");

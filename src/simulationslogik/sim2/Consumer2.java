@@ -23,5 +23,4 @@ public class Consumer2 extends Thread {
             }
         }
     }
-
 }

@@ -251,7 +251,7 @@ public class Automat implements Serializable, Subjekt {
         return erg;
     }
 
-    public int getCakeInAutomat(){
+    public int kuchenAnzahlInAutomat(){
         int count=0;
         for(int i=0; i<faecherAnzahl; i++){
             if(faecher[i] != null){ count++; }
