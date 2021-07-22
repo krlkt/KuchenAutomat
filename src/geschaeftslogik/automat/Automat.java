@@ -42,6 +42,9 @@ public class Automat implements Serializable, Subjekt {
 
     //Hauptmethoden
     public boolean addHersteller(String name){
+        if(name.length()==0){       //name cant be empty
+            return false;
+        }
         Hersteller h = new HerstellerImpl(name);
         if(h.getName() != null) {
             for (Hersteller hersteller : herstellerList) {

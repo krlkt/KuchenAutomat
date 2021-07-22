@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="643.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controller.ViewModel">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="755.0" prefWidth="904.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controller.ViewModel">
     <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kuchen Automat">
          <font>
             <Font name="Futura Medium" size="19.0" />
          </font>
       </Text>
-      <AnchorPane prefHeight="650.0" prefWidth="704.0">
+      <AnchorPane prefHeight="856.0" prefWidth="904.0">
          <children>
             <ListView fx:id="herstellerListView" layoutX="14.0" layoutY="37.0" prefHeight="340.0" prefWidth="255.0" />
             <Text boundsType="VISUAL" layoutX="13.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hersteller Liste">
@@ -25,31 +27,88 @@
                   <Font size="17.0" />
                </font>
             </Text>
-            <ListView fx:id="kuchenList" layoutX="290.0" layoutY="37.0" prefHeight="340.0" prefWidth="323.0" />
-            <Text boundsType="VISUAL" layoutX="521.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kuchen Liste">
+            <ListView fx:id="kuchenList" layoutX="288.0" layoutY="38.0" prefHeight="340.0" prefWidth="354.0" />
+            <Text boundsType="VISUAL" layoutX="298.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kuchen Liste">
                <font>
                   <Font size="17.0" />
                </font>
             </Text>
             <Button fx:id="removeSelectedHerstellerButton" layoutX="17.0" layoutY="476.0" mnemonicParsing="false" onMouseClicked="#removeSelectedHerstellerClicked" prefHeight="26.0" prefWidth="246.0" text="remove selected" />
-            <Button fx:id="addHerstellerButton" layoutX="225.0" layoutY="405.0" mnemonicParsing="false" onMouseClicked="#addHerstellerClicked" text="add" />
-            <TextField fx:id="addHerstellerField" layoutX="17.0" layoutY="405.0" prefHeight="26.0" prefWidth="176.0" text="type name to add.." />
-            <TextField fx:id="removeHerstellerField" layoutX="17.0" layoutY="438.0" prefHeight="26.0" prefWidth="176.0" text="type name to remove.." />
-            <Button fx:id="removeHerstellerButton" layoutX="201.0" layoutY="438.0" mnemonicParsing="false" onMouseClicked="#removeHerstellerClicked" prefHeight="26.0" prefWidth="62.0" text="remove" />
+            <Button fx:id="addHerstellerButton" layoutX="199.0" layoutY="405.0" mnemonicParsing="false" onMouseClicked="#addHerstellerClicked" prefHeight="26.0" prefWidth="64.0" text="add" />
+            <TextField fx:id="addHerstellerField" layoutX="17.0" layoutY="405.0" prefHeight="26.0" prefWidth="176.0" promptText="type name to add..." />
+            <TextField fx:id="removeHerstellerField" layoutX="17.0" layoutY="438.0" prefHeight="26.0" prefWidth="176.0" promptText="type name to remove..." />
+            <Button fx:id="removeHerstellerButton" layoutX="199.0" layoutY="438.0" mnemonicParsing="false" onMouseClicked="#removeHerstellerClicked" prefHeight="26.0" prefWidth="64.0" text="remove" />
             <RadioButton fx:id="rad_obstkuchen" layoutX="290.0" layoutY="396.0" mnemonicParsing="false" text="Obstkuchen" />
             <RadioButton fx:id="rad_kremkuchen" layoutX="290.0" layoutY="421.0" mnemonicParsing="false" text="Kremkuchen" />
             <RadioButton fx:id="rad_obsttorte" layoutX="291.0" layoutY="445.0" mnemonicParsing="false" text="Obsttorte" />
-            <TextField fx:id="fruitField" layoutX="484.0" layoutY="398.0" prefHeight="26.0" prefWidth="132.0" text="type obstsorte.." />
-            <Button fx:id="addKuchenButton" layoutX="290.0" layoutY="476.0" mnemonicParsing="false" onMouseClicked="#addKuchenClicked" prefHeight="26.0" prefWidth="323.0" text="add" />
-            <Button fx:id="clearKuchenButton" layoutX="290.0" layoutY="546.0" mnemonicParsing="false" onMouseClicked="#clearKuchenClicked" prefHeight="26.0" prefWidth="323.0" text="remove all" />
-            <TextField fx:id="creamField" layoutX="484.0" layoutY="434.0" prefHeight="26.0" prefWidth="132.0" text="type kremsorte.." />
-            <Label fx:id="warningLabel" layoutX="20.0" layoutY="585.0" prefHeight="26.0" prefWidth="593.0" textAlignment="CENTER" />
-            <Text boundsType="VISUAL" layoutX="411.0" layoutY="416.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Obst Sorte:" wrappingWidth="69.11865234375" />
-            <Text boundsType="VISUAL" layoutX="411.0" layoutY="451.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Krem Sorte:" wrappingWidth="69.11865234375" />
+            <TextField fx:id="fruitField" layoutX="484.0" layoutY="400.0" prefHeight="26.0" prefWidth="160.0" promptText="type obstsorte..." />
+            <Button fx:id="addKuchenButton" layoutX="293.0" layoutY="591.0" mnemonicParsing="false" onMouseClicked="#addKuchenClicked" prefHeight="26.0" prefWidth="349.0" text="add" />
+            <Button fx:id="clearKuchenButton" layoutX="294.0" layoutY="658.0" mnemonicParsing="false" onMouseClicked="#clearKuchenClicked" prefHeight="26.0" prefWidth="347.0" text="remove all" />
+            <TextField fx:id="creamField" layoutX="484.0" layoutY="435.0" prefHeight="26.0" prefWidth="160.0" promptText="type kremsorte..." />
+            <Text boundsType="VISUAL" layoutX="408.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Obst Sorte:" wrappingWidth="80.57242943709628">
+               <font>
+                  <Font size="15.0" />
+               </font></Text>
+            <Text boundsType="VISUAL" layoutX="406.0" layoutY="453.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Krem Sorte:" wrappingWidth="80.57242943709628">
+               <font>
+                  <Font size="15.0" />
+               </font></Text>
             <Button fx:id="showButton" layoutX="19.0" layoutY="546.0" mnemonicParsing="false" onMouseClicked="#showButtonClicked" prefHeight="26.0" prefWidth="246.0" text="show machine condition in console" />
-            <Button fx:id="removeKuchenButton" layoutX="454.0" layoutY="511.0" mnemonicParsing="false" onMouseClicked="#removeKuchenClicked" prefHeight="26.0" prefWidth="159.0" text="remove" />
-            <Text boundsType="VISUAL" layoutX="289.0" layoutY="519.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Locker Number:" wrappingWidth="69.11865234375" />
-            <TextField fx:id="fachNummerField" layoutX="349.0" layoutY="511.0" prefHeight="26.0" prefWidth="76.0" text="type here.." />
+            <Button fx:id="removeKuchenButton" layoutX="457.0" layoutY="624.0" mnemonicParsing="false" onMouseClicked="#removeKuchenClicked" prefHeight="26.0" prefWidth="185.0" text="remove" />
+            <Text boundsType="VISUAL" layoutX="293.0" layoutY="633.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Locker Number:" wrappingWidth="69.11865234375" />
+            <TextField fx:id="fachNummerField" layoutX="349.0" layoutY="624.0" prefHeight="26.0" prefWidth="76.0" text="type here.." />
+            <Label fx:id="warningLabel" layoutX="25.0" layoutY="687.0" prefHeight="26.0" prefWidth="593.0" textAlignment="CENTER" />
+            <TextField fx:id="preisField" layoutX="329.0" layoutY="476.0" prefHeight="26.0" prefWidth="129.0" promptText="type price.." />
+            <Text boundsType="VISUAL" layoutX="290.0" layoutY="493.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preis:" wrappingWidth="66.90046294663046">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text boundsType="VISUAL" layoutX="460.0" layoutY="495.0" strokeType="OUTSIDE" strokeWidth="0.0" text="€" wrappingWidth="66.90046294663046">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <TextField fx:id="nutritionField" layoutX="356.0" layoutY="512.0" prefHeight="26.0" prefWidth="102.0" promptText="type nutrition.." />
+            <Text boundsType="VISUAL" layoutX="290.0" layoutY="530.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nutrition:" wrappingWidth="66.90046294663046">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text boundsType="VISUAL" layoutX="462.0" layoutY="529.0" strokeType="OUTSIDE" strokeWidth="0.0" text="cal" wrappingWidth="66.90046294663046" />
+            <Text boundsType="VISUAL" layoutX="290.0" layoutY="566.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Durabiltiy:" wrappingWidth="74.13419571965824">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="durabilityField" layoutX="361.0" layoutY="548.0" prefHeight="4.0" prefWidth="98.0" promptText="type durability.." />
+            <Text boundsType="VISUAL" layoutX="463.0" layoutY="566.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hours" wrappingWidth="66.90046294663046" />
+            <Text boundsType="VISUAL" layoutX="546.0" layoutY="488.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Allergies" wrappingWidth="66.90046294663046">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="113.0" layoutX="503.0" layoutY="468.0" stroke="BLACK" strokeType="INSIDE" width="140.0" />
+            <CheckBox fx:id="check_gluten" layoutX="513.0" layoutY="493.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="92.0" text="Gluten">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="check_sesamsamen" layoutX="513.0" layoutY="513.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="92.0" text="Sesamsamen">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="check_erdnuss" layoutX="513.0" layoutY="533.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="92.0" text="Erdnuss">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="check_haselnuss" layoutX="513.0" layoutY="554.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="92.0" text="Haselnuss">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </CheckBox>
          </children>
       </AnchorPane>
     </children>
