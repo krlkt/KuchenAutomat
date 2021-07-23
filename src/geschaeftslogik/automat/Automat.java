@@ -37,7 +37,11 @@ public class Automat implements Serializable, Subjekt {
     }
 
     public Fach getFaecher(int fachNummer) {
-        return faecher[fachNummer];
+        if(faecher[fachNummer]==null){
+            return null;
+        }else {
+            return faecher[fachNummer];
+        }
     }
 
     //Hauptmethoden
@@ -382,5 +386,9 @@ public class Automat implements Serializable, Subjekt {
 
     public void setMode(Mode mode) {
         this.mode = mode;
+    }
+
+    public void setHerstellerList(List<Hersteller> herstellerList) {
+        this.herstellerList = herstellerList;
     }
 }

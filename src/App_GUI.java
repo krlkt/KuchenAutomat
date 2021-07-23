@@ -9,7 +9,11 @@ public class App_GUI extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("ui/view/app.fxml"));
         primaryStage.setTitle("Automat GUI");
-        primaryStage.setScene(new Scene(root, 675, 650));
+        primaryStage.setScene(new Scene(root, 890, 750));
+        primaryStage.setMinHeight(770);
+        primaryStage.setMinWidth(890);
+        primaryStage.setMaxHeight(770);
+        primaryStage.setMaxWidth(890);
         primaryStage.show();
     }
 

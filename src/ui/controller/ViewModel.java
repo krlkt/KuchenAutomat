@@ -1,10 +1,15 @@
 package ui.controller;
 
 import geschaeftslogik.automat.*;
+import geschaeftslogik.persistence.JBP;
+import geschaeftslogik.persistence.JOS;
+import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -30,10 +35,13 @@ public class ViewModel {
     @FXML private TextField durabilityField;
 
     @FXML private Label warningLabel;
+    @FXML private Label persistenceLabel;
 
     @FXML private RadioButton rad_obstkuchen;
     @FXML private RadioButton rad_kremkuchen;
     @FXML private RadioButton rad_obsttorte;
+    @FXML private RadioButton rad_jos;
+    @FXML private RadioButton rad_jbp;
 
     @FXML private CheckBox check_gluten;
     @FXML private CheckBox check_sesamsamen;
@@ -50,6 +58,12 @@ public class ViewModel {
         rad_kremkuchen.setToggleGroup(kuchenRadio);
         rad_obsttorte.setToggleGroup(kuchenRadio);
         kuchenRadio.selectToggle(rad_obstkuchen);
+        ToggleGroup persistenceRadio = new ToggleGroup();
+        rad_jos.setToggleGroup(persistenceRadio);
+        rad_jbp.setToggleGroup(persistenceRadio);
+        persistenceRadio.selectToggle(rad_jbp);
+        warningLabel.setTextFill(Color.color(1,0,0));
+        persistenceLabel.setTextFill(Color.color(0,1,0));
     }
 
     //Hersteller methods
@@ -58,12 +72,15 @@ public class ViewModel {
         if(automat.addHersteller(name)) {
             herstellerListView.getItems().add(name);
             System.out.println("added manufacturer to machine");
+            pause(warningLabel);
         }else if(name.length() == 0){
             System.out.println("manufacturer name cant be empty");
             warningLabel.setText("manufacturer name cant be empty");
+            pause(warningLabel);
         } else{
             System.out.println("manufacturer already exist");
             warningLabel.setText("manufacturer already exist");
+            pause(warningLabel);
         }
     }
 
@@ -73,21 +90,33 @@ public class ViewModel {
         if(automat.removeHersteller(toRemove)) {
             System.out.println("selected hersteller removed");
             herstellerListView.getItems().remove(selectedID);
-        }else {
+        }else if(selectedID == -1){
+            System.out.println("failed to remove manufacturer, select one manufacturer from the list first");
+            warningLabel.setText("failed to remove manufacturer, select one manufacturer from the list first");
+            pause(warningLabel);
+        } else {
             System.out.println("failed to remove manufacturer, cake from this manufacturer still exists");
             warningLabel.setText("failed to remove manufacturer, cake from this manufacturer still exists");
+            pause(warningLabel);
         }
     }
 
     public void removeHerstellerClicked() throws Exception {
         String name = removeHerstellerField.getText();
-        int gesuchtIndex = getHerstellerIndex(name);
-        if(automat.removeHersteller(name)){
-            System.out.println("removed Hersteller from machine");
-            herstellerListView.getItems().remove(gesuchtIndex);
+        if(name.length() == 0){
+            System.out.println("manufacturer to remove name cant be empty");
+            warningLabel.setText("manufacturer to remove name cant be empty");
+            pause(warningLabel);
         }else {
-            System.out.println("failed to remove manufacturer, cake from this manufacturer still exists");
-            warningLabel.setText("failed to remove manufacturer, cake from this manufacturer still exists");
+            int gesuchtIndex = getHerstellerIndex(name);
+            if (automat.removeHersteller(name)) {
+                System.out.println("removed Hersteller from machine");
+                herstellerListView.getItems().remove(gesuchtIndex);
+            } else {
+                System.out.println("failed to remove manufacturer, cake from this manufacturer still exists");
+                warningLabel.setText("failed to remove manufacturer, cake from this manufacturer still exists");
+                pause(warningLabel);
+            }
         }
     }
 
@@ -118,29 +147,34 @@ public class ViewModel {
             naehrwert = Integer.parseInt(nutritionField.getText());
         }catch (Exception e){
             warningLabel.setText("failed to parse nutrition");
+            pause(warningLabel);
             throw new Exception("failed to parse nutrition");
         }
         try {
             haltbarkeit = Long.parseLong(durabilityField.getText());
         }catch (Exception e){
             warningLabel.setText("failed to parse durability");
+            pause(warningLabel);
             throw new Exception("failed to parse durability");
         }
         try {
             preis = Double.parseDouble(preisField.getText());
         }catch (Exception e){
             warningLabel.setText("failed to parse price");
+            pause(warningLabel);
             throw new Exception("failed to parse price");
         }
 
         //try adding cake to machine
         if(herstellerName==null){
             warningLabel.setText("select hersteller name first!");
+            pause(warningLabel);
         }else {
             if (rad_obsttorte.isSelected()) {
                 if (creamField.getText().length() == 0 || fruitField.getText().length() == 0 || preisField.getText().length() == 0
                         || durabilityField.getText().length() == 0 || nutritionField.getText().length() == 0) {
                     warningLabel.setText("type in all needed fields first!");
+                    pause(warningLabel);
                 } else {
                     Obsttorte ot = new ObsttorteImpl(fruitField.getText(), creamField.getText(), hersteller, naehrwert, haltbarkeit, BigDecimal.valueOf(preis));
                     if(allergene.size() != 0){ ot.setAllergene(allergene);}
@@ -153,6 +187,7 @@ public class ViewModel {
                 if (creamField.getText().length() == 0 || preisField.getText().length() == 0
                         || durabilityField.getText().length() == 0 || nutritionField.getText().length() == 0) {
                     warningLabel.setText("type in all fields first!");
+                    pause(warningLabel);
                 } else {
                     Kremkuchen kk = new KremkuchenImpl(creamField.getText(), hersteller, naehrwert, haltbarkeit, BigDecimal.valueOf(preis));
                     if(allergene.size() != 0){ kk.setAllergene(allergene);}
@@ -165,6 +200,7 @@ public class ViewModel {
                 if (fruitField.getText().length() == 0 || preisField.getText().length() == 0
                         || durabilityField.getText().length() == 0 || nutritionField.getText().length() == 0) {
                     warningLabel.setText("type in all fields first!");
+                    pause(warningLabel);
                 } else {
                     Obstkuchen ok = new ObstkuchenImpl(fruitField.getText(), hersteller, naehrwert, haltbarkeit, BigDecimal.valueOf(preis));
                     if(allergene.size() != 0){ ok.setAllergene(allergene);}
@@ -221,6 +257,7 @@ public class ViewModel {
         }else{
             System.out.println("failed to remove cake");
             warningLabel.setText("failed to remove cake");
+            pause(warningLabel);
         }
     }
 
@@ -231,9 +268,55 @@ public class ViewModel {
         System.out.println("list of cake cleared");
     }
 
+    //Persistency methods
+    public void saveClicked(){
+        if(rad_jbp.isSelected()) {
+            JBP jbp = new JBP();
+            jbp.save(automat);
+        }else{
+            JOS jos = new JOS();
+            jos.save(automat);
+        }
+        System.out.println("saved successfully..");
+        persistenceLabel.setText("saved successfully..");
+        pause(persistenceLabel);
+    }
+
+    public void loadClicked(){
+        if(rad_jbp.isSelected()){
+            JBP jbp = new JBP();
+            automat = jbp.load();
+        }else{
+            JOS jos = new JOS();
+            automat = jos.load();
+        }
+        //synchronizing herstellerListView with machine
+        herstellerListView.getItems().clear();
+        for(int i=0; i<automat.getHerstellerList().size(); i++){
+            herstellerListView.getItems().add(automat.getHerstellerList().get(i).getName());
+        }
+        //synchronizing kuchenListView with machine
+        kuchenList.getItems().clear();
+        for(int i=0; i<automat.getFaecherAnzahl(); i++){
+            if(automat.getFaecher(i)!=null){
+                Verkaufskuchen ok = automat.getFaecher(i).getKuchen();
+                kuchenList.getItems().add("Fach: " + ok.getFachnummer() + " " + ok.getName());
+            }
+        }
+        System.out.println("loaded successfully..");
+        persistenceLabel.setText("loaded successfully..");
+        pause(persistenceLabel);
+    }
+
     public void showButtonClicked(){
         System.out.println(Arrays.toString(automat.showHerstellerList()));
         System.out.println(automat.showKuchenList());
         System.out.println(automat.showAllergene());
+    }
+
+    void pause(Label lable){
+        PauseTransition pause = new PauseTransition(Duration.seconds(2));
+        pause.setOnFinished(e -> lable.setText(null));
+        pause.play();
     }
 }
