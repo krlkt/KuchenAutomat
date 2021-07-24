@@ -1,8 +1,7 @@
 package simulationslogik;
 
-import geschaeftslogik.automat.Automat;
-import geschaeftslogik.automat.Verkaufskuchen;
-import geschaeftslogik.automat.Verkaufsobjekt;
+import model.geschaeftslogik.automat.Automat;
+import model.geschaeftslogik.automat.Verkaufskuchen;
 
 import java.util.*;
 import java.util.concurrent.locks.Condition;

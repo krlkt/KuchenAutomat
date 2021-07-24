@@ -27,23 +27,6 @@ public class Automat implements Serializable, Subjekt {
         this.faecher = new Fach[faecherAnzahl];
     }
 
-    //getter
-    public int getFaecherAnzahl() {
-        return faecherAnzahl;
-    }
-
-    public Verkaufskuchen getKuchen(int fachNummer) {
-        return faecher[fachNummer].getKuchen();
-    }
-
-    public Fach getFaecher(int fachNummer) {
-        if(faecher[fachNummer]==null){
-            return null;
-        }else {
-            return faecher[fachNummer];
-        }
-    }
-
     //Hauptmethoden
     public boolean addHersteller(String name){
         if(name.length()==0){       //name cant be empty
@@ -129,7 +112,7 @@ public class Automat implements Serializable, Subjekt {
         throw new Exception("Hersteller doesn't exist");
     }
 
-    //kuchen automatisch ins freie Fach hinzufügen
+    //kuchen automatisch ins erst mögliche freie Fach hinzufügen
     public boolean addKuchen(Verkaufskuchen kuchen, String name) throws Exception {
         for(int i=0; i<faecherAnzahl; i++){
             if(faecher[i]==null){
@@ -193,7 +176,7 @@ public class Automat implements Serializable, Subjekt {
     }
 
     String print_helpMethod(int i){
-        String erg="";
+        String erg;
         String fn = Integer.toString(faecher[i].getFachnummer());
         if(faecher[i].getKuchen().getHaltbarkeit()!=null) {
             erg = "Fach " + fn + ": " + faecher[i].getName() + ", Inspektions datum: " +
@@ -230,11 +213,11 @@ public class Automat implements Serializable, Subjekt {
     }
 
     public String showAllergene(){
-        String erg = new String();
+        String erg = "";
         for(int i=0; i<faecherAnzahl; i++){
             if(faecher[i]!=null){
                 if(faecher[i].getKuchen().getAllergene()!=null){
-                    erg += "Fachnummer " + i+": " + faecher[i].getKuchen().getAllergene().toString() + System.lineSeparator();;
+                    erg += "Fachnummer " + i+": " + faecher[i].getKuchen().getAllergene().toString() + System.lineSeparator();
                 }
             }
         }
@@ -284,24 +267,48 @@ public class Automat implements Serializable, Subjekt {
         return getFaecher(fachNummer) != null;
     }
 
-    public List<Hersteller> getHerstellerList() {
-        return herstellerList;
+    //Getter
+    public int getFaecherAnzahl() {
+        return faecherAnzahl;
     }
 
-    public void setFaecher(Fach[] faecher) {
-        this.faecher = faecher;
+    public Verkaufskuchen getKuchen(int fachNummer) {
+        if(faecher[fachNummer] == null){
+            return null;
+        }else {
+            return faecher[fachNummer].getKuchen();
+        }
+    }
+
+    public Fach getFaecher(int fachNummer) {
+        if(faecher[fachNummer]==null){
+            return null;
+        }else {
+            return faecher[fachNummer];
+        }
+    }
+
+    public List<Hersteller> getHerstellerList() {
+        return herstellerList;
     }
 
     public Fach[] getFaecher() {
         return faecher;
     }
 
+    //Setter
+    public void setHerstellerList(List<Hersteller> herstellerList) {    //wird für jbp persistency benötigt
+        this.herstellerList = herstellerList;
+    }
+
+    public void setFaecher(Fach[] faecher) {
+        this.faecher = faecher;
+    }
+
     //persistence
     public static void serialize(String filename, Collection<Automat> items){
         try (ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(filename))){
             serialize(oos,items);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -314,11 +321,7 @@ public class Automat implements Serializable, Subjekt {
     public static Collection<Automat> deserialize(String filename){
         try (ObjectInputStream ois=new ObjectInputStream(new FileInputStream(filename))){
             return deserialize(ois);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return null;
@@ -362,7 +365,7 @@ public class Automat implements Serializable, Subjekt {
 
 
     //Beobachter
-    private List<Beobachter> beobachterList = new LinkedList<>();
+    private final List<Beobachter> beobachterList = new LinkedList<>();
     @Override public void meldeAn(Beobachter beobachter) {
         this.beobachterList.add(beobachter);
     }
@@ -388,7 +391,31 @@ public class Automat implements Serializable, Subjekt {
         this.mode = mode;
     }
 
-    public void setHerstellerList(List<Hersteller> herstellerList) {
-        this.herstellerList = herstellerList;
+    //methods for sorting based on durability
+    public Verkaufskuchen getFastestExpiryCake(List<Verkaufskuchen> list){
+        if(list.size() == 0){
+            return null;
+        }else {
+            Verkaufskuchen gesucht = this.getFirstCake();
+            for (Verkaufskuchen verkaufskuchen : list) {
+                if (verkaufskuchen != null) {
+                    assert gesucht != null;
+                    if (verkaufskuchen.getHaltbarkeit().compareTo(gesucht.getHaltbarkeit()) < 0)
+                        gesucht = verkaufskuchen;
+                }
+            }
+            return gesucht;
+        }
+    }
+
+    private Verkaufskuchen getFirstCake() {
+        if(kuchenAnzahlInAutomat()>0) {
+            for (int i = 0; i<faecherAnzahl; i++){
+                if(null != faecher[i]){
+                    return this.faecher[i].getKuchen();
+                }
+            }
+        }
+        return null;
     }
 }

@@ -1,4 +1,4 @@
-package ui.controller;
+package controller.beobachter;
 
 import geschaeftslogik.automat.*;
 import geschaeftslogik.persistence.JBP;
@@ -12,10 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 import java.math.BigDecimal;
-import java.text.ParseException;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.LinkedList;
+import java.util.*;
 
 public class ViewModel {
     private Automat automat = new Automat(1000);
@@ -33,15 +30,21 @@ public class ViewModel {
     @FXML private TextField preisField;
     @FXML private TextField nutritionField;
     @FXML private TextField durabilityField;
+    @FXML private TextField inspectNumberField;
 
     @FXML private Label warningLabel;
     @FXML private Label persistenceLabel;
+    @FXML private Label inspectLabel;
 
     @FXML private RadioButton rad_obstkuchen;
     @FXML private RadioButton rad_kremkuchen;
     @FXML private RadioButton rad_obsttorte;
     @FXML private RadioButton rad_jos;
     @FXML private RadioButton rad_jbp;
+    @FXML private RadioButton rad_lockerNumber;
+    @FXML private RadioButton rad_hersteller;
+    @FXML private RadioButton rad_inspectionDate;
+    @FXML private RadioButton rad_durability;
 
     @FXML private CheckBox check_gluten;
     @FXML private CheckBox check_sesamsamen;
@@ -62,8 +65,15 @@ public class ViewModel {
         rad_jos.setToggleGroup(persistenceRadio);
         rad_jbp.setToggleGroup(persistenceRadio);
         persistenceRadio.selectToggle(rad_jbp);
+        ToggleGroup sortGroup = new ToggleGroup();
+        rad_lockerNumber.setToggleGroup(sortGroup);
+        rad_hersteller.setToggleGroup(sortGroup);
+        rad_inspectionDate.setToggleGroup(sortGroup);
+        rad_durability.setToggleGroup(sortGroup);
+        sortGroup.selectToggle(rad_lockerNumber);
         warningLabel.setTextFill(Color.color(1,0,0));
         persistenceLabel.setTextFill(Color.color(0,1,0));
+        inspectLabel.setTextFill(Color.color(0,1,0));
     }
 
     //Hersteller methods
@@ -314,9 +324,81 @@ public class ViewModel {
         System.out.println(automat.showAllergene());
     }
 
-    void pause(Label lable){
+    void pause(Label label){
         PauseTransition pause = new PauseTransition(Duration.seconds(2));
-        pause.setOnFinished(e -> lable.setText(null));
+        pause.setOnFinished(e -> label.setText(null));
         pause.play();
+    }
+
+    public void inspectClicked(){
+        Date date = new Date();
+        if(inspectNumberField.getText().length() == 0){
+            warningLabel.setText("inspection locker number cant be empty");
+            pause(warningLabel);
+            System.out.println("inspection locker number cant be empty");
+        }else{
+            try{
+                int i = Integer.parseInt(inspectNumberField.getText());
+                if(automat.getKuchen(i) != null){
+                    automat.getKuchen(i).setInspektionsdatum(date);
+                    inspectLabel.setText("inspected cake from locker " + i);
+                    pause(inspectLabel);
+                    System.out.println("inspected cake from locker " + i);
+                }else{
+                    warningLabel.setText("locker number "+ i + " is empty.. nothing to inspect");
+                    pause(warningLabel);
+                    System.out.println("locker number "+ i + " is empty.. nothing to inspect");
+                }
+            }catch (Exception e){
+                warningLabel.setText("cant parse inspection locker number");
+                pause(warningLabel);
+                System.out.println("cant parse inspection locker number");
+            }
+        }
+    }
+
+    public void sortClicked(){
+        if(rad_lockerNumber.isSelected()){
+            kuchenList.getItems().clear();
+            for(int i=0; i<automat.getFaecherAnzahl(); i++) {
+                if(automat.getFaecher(i)!=null) {
+                    Verkaufskuchen ok = automat.getFaecher(i).getKuchen();
+                    kuchenList.getItems().add("Fach: " + ok.getFachnummer() + " " + ok.getName());
+                }
+            }
+        }else if(rad_hersteller.isSelected()){
+            kuchenList.getItems().clear();
+            List<Hersteller> herstellerList = automat.getHerstellerList();
+            for(Hersteller h : herstellerList) {
+                for (int i = 0; i < automat.getFaecherAnzahl(); i++) {
+                    if (automat.getFaecher(i) != null) {
+                        if (automat.getKuchen(i).getHersteller().getName().equalsIgnoreCase(h.getName())) {
+                            Verkaufskuchen ok = automat.getFaecher(i).getKuchen();
+                            kuchenList.getItems().add("Fach: " + ok.getFachnummer() + " " + ok.getName());
+                        }
+                    }
+                }
+            }
+        }else if(rad_inspectionDate.isSelected()){
+
+        }else if(rad_durability.isSelected()){
+            kuchenList.getItems().clear();
+            List<Verkaufskuchen> list = new LinkedList<>();
+            for(int i=0; i<automat.getFaecherAnzahl(); i++){
+                if(automat.getKuchen(i) != null) {
+                    list.add(automat.getKuchen(i));
+                }
+            }
+            for(Verkaufskuchen list1 : list) {
+                System.out.println(list1.getName());
+                System.out.println(list1.getFachnummer());
+            }
+            for(int i=0; i<automat.kuchenAnzahlInAutomat(); i++){
+                Verkaufskuchen k = automat.getFastestExpiryCake(list);
+                kuchenList.getItems().add("Fach: " + k.getFachnummer() + " " + k.getName());
+                list.remove(k);
+            }
+            //TODO
+        }
     }
 }

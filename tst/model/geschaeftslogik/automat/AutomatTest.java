@@ -9,6 +9,7 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 
 public class AutomatTest {
@@ -25,8 +26,8 @@ public class AutomatTest {
 
     @Test
     public void createHersteller(){
-        Hersteller hersteller = new HerstellerImpl("Dr. Oatker");
-        Assert.assertEquals(hersteller.getName(),"Dr. Oatker");
+        Hersteller oatker = new HerstellerImpl("Dr. Oatker");
+        Assert.assertEquals(oatker.getName(),"Dr. Oatker");
     }
 
     @Test
@@ -217,6 +218,20 @@ public class AutomatTest {
         automat.addKuchen(obstkuchenA, "obstkuchenA");
         automat.addKuchen(obstkuchenB, "obstkuchenB");
         Assert.assertEquals(automat.kuchenAnzahlInAutomat(), 8);
+    }
+
+    @Test
+    public void getFastestExpiryCake() throws Exception {
+        List<Verkaufskuchen> cakes = new LinkedList<>();
+        Obstkuchen obstkuchenC = new ObstkuchenImpl("Bananen, Mango", hersteller, 500, 40, BigDecimal.valueOf(5.5));
+        automat.addKuchen(obstkuchenA, "obsA", 5);
+        automat.addKuchen(obstkuchenB, "obsB");
+        automat.addKuchen(obstkuchenC, "obsC", 7);
+
+        cakes.add(obstkuchenA);
+        cakes.add(obstkuchenB);
+        cakes.add(obstkuchenC);
+        Assert.assertEquals(automat.getFastestExpiryCake(cakes), obstkuchenC);
     }
 
 }

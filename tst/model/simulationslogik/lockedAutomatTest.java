@@ -1,6 +1,6 @@
 package simulationslogik;
 
-import geschaeftslogik.automat.*;
+import model.geschaeftslogik.automat.*;
 import org.junit.Assert;
 import org.junit.Test;
 import java.math.BigDecimal;
