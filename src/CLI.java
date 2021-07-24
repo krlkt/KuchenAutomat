@@ -1,6 +1,6 @@
 import controller.beobachter.AllergeneBeobachter;
 import controller.events.*;
-import geschaeftslogik.automat.Automat;
+import model.geschaeftslogik.automat.Automat;
 import controller.beobachter.FastVollBeobachter;
 
 public class CLI {

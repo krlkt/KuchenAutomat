@@ -1,11 +1,7 @@
 package controller.events;
 
-import geschaeftslogik.automat.Automat;
-import controller.beobachter.Beobachter;
-import controller.beobachter.Subjekt;
+import model.geschaeftslogik.automat.Automat;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Console {

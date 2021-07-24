@@ -1,7 +1,7 @@
 package controller.events;
 
-import geschaeftslogik.automat.Automat;
-import geschaeftslogik.automat.Mode;
+import model.geschaeftslogik.automat.Automat;
+import model.geschaeftslogik.automat.Mode;
 
 public class InputEventListenerDelete implements InputEventListener{
     Automat automat;

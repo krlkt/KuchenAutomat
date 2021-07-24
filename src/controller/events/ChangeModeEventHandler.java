@@ -1,7 +1,5 @@
 package controller.events;
 
-import geschaeftslogik.automat.Automat;
-
 import java.util.LinkedList;
 import java.util.List;
 

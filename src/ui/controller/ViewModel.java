@@ -1,8 +1,11 @@
-package controller.beobachter;
+package ui.controller;
 
-import geschaeftslogik.automat.*;
-import geschaeftslogik.persistence.JBP;
-import geschaeftslogik.persistence.JOS;
+import model.geschaeftslogik.automat.*;
+import model.geschaeftslogik.automat.belag.Belag;
+import model.geschaeftslogik.automat.belag.BelagImpl;
+import model.geschaeftslogik.automat.belag.KuchenBodenImpl;
+import model.geschaeftslogik.persistence.JBP;
+import model.geschaeftslogik.persistence.JOS;
 import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,6 +34,10 @@ public class ViewModel {
     @FXML private TextField nutritionField;
     @FXML private TextField durabilityField;
     @FXML private TextField inspectNumberField;
+    @FXML private TextField toppingNameField;
+    @FXML private TextField toppingPriceField;
+    @FXML private TextField toppingNutritionField;
+    @FXML private TextField toppingDurabilityField;
 
     @FXML private Label warningLabel;
     @FXML private Label persistenceLabel;
@@ -43,8 +50,6 @@ public class ViewModel {
     @FXML private RadioButton rad_jbp;
     @FXML private RadioButton rad_lockerNumber;
     @FXML private RadioButton rad_hersteller;
-    @FXML private RadioButton rad_inspectionDate;
-    @FXML private RadioButton rad_durability;
 
     @FXML private CheckBox check_gluten;
     @FXML private CheckBox check_sesamsamen;
@@ -68,8 +73,6 @@ public class ViewModel {
         ToggleGroup sortGroup = new ToggleGroup();
         rad_lockerNumber.setToggleGroup(sortGroup);
         rad_hersteller.setToggleGroup(sortGroup);
-        rad_inspectionDate.setToggleGroup(sortGroup);
-        rad_durability.setToggleGroup(sortGroup);
         sortGroup.selectToggle(rad_lockerNumber);
         warningLabel.setTextFill(Color.color(1,0,0));
         persistenceLabel.setTextFill(Color.color(0,1,0));
@@ -217,6 +220,141 @@ public class ViewModel {
                     if (automat.addKuchen(ok, "Obstkuchen")) {
                         System.out.println("added fruitcake to machine");
                         kuchenList.getItems().add("Fach: " + ok.getFachnummer() + " " + ok.getName());
+                    }
+                }
+            }
+        }
+    }
+
+    //add Kuchen Mit Belag (zusatz Anforderung)
+    public void addKuchenMitBelagClicked() throws Exception {
+        String herstellerName = herstellerListView.getSelectionModel().getSelectedItem();
+        Hersteller hersteller = new HerstellerImpl(herstellerName);
+        int naehrwert;
+        int belagNaehrwert;
+        long haltbarkeit;
+        long belagHaltbarkeit;
+        Double preis;
+        Double belagPreis;
+        Collection<Allergen> baseCakeAllergene = new LinkedList<>();
+        Collection<Allergen> toppingAllergene = new LinkedList<>();
+
+        //add allergene
+        if(check_gluten.isSelected()){ baseCakeAllergene.add(Allergen.Gluten); }
+        if(check_sesamsamen.isSelected()){ baseCakeAllergene.add(Allergen.Sesamsamen); }
+        if(check_erdnuss.isSelected()){ baseCakeAllergene.add(Allergen.Erdnuss); }
+        if(check_haselnuss.isSelected()){ baseCakeAllergene.add(Allergen.Haselnuss); }
+        if(check_gluten.isSelected()){ toppingAllergene.add(Allergen.Gluten); }
+        if(check_sesamsamen.isSelected()){ toppingAllergene.add(Allergen.Sesamsamen); }
+        if(check_erdnuss.isSelected()){ toppingAllergene.add(Allergen.Erdnuss); }
+        if(check_haselnuss.isSelected()){ toppingAllergene.add(Allergen.Haselnuss); }
+
+        //try parsing
+        try {
+            naehrwert = Integer.parseInt(nutritionField.getText());
+        }catch (Exception e){
+            warningLabel.setText("failed to parse base cake nutrition");
+            pause(warningLabel);
+            throw new Exception("failed to parse base cake nutrition");
+        }
+        try {
+            belagNaehrwert = Integer.parseInt(toppingNutritionField.getText());
+        }catch (Exception e){
+            warningLabel.setText("failed to parse topping nutrition");
+            pause(warningLabel);
+            throw new Exception("failed to parse topping nutrition");
+        }
+        try {
+            haltbarkeit = Long.parseLong(durabilityField.getText());
+        }catch (Exception e){
+            warningLabel.setText("failed to parse base cake durability");
+            pause(warningLabel);
+            throw new Exception("failed to parse base cake durability");
+        }
+        try {
+            belagHaltbarkeit = Long.parseLong(toppingDurabilityField.getText());
+        }catch (Exception e){
+            warningLabel.setText("failed to parse topping durability");
+            pause(warningLabel);
+            throw new Exception("failed to parse topping durability");
+        }
+        belagPreis = 3.0;
+        System.out.println(toppingPriceField.getText());
+        try {
+            preis = Double.parseDouble(preisField.getText());
+        }catch (Exception e){
+            warningLabel.setText("failed to parse base cake price");
+            pause(warningLabel);
+            throw new Exception("failed to parse base cake price");
+        }
+
+        //try adding cake to machine
+        if(herstellerName==null){
+            warningLabel.setText("select hersteller name first!");
+            pause(warningLabel);
+        }else {
+            if (rad_obsttorte.isSelected()) {
+                if (preisField.getText().length() == 0 || durabilityField.getText().length() == 0 ||
+                        nutritionField.getText().length() == 0 || toppingNameField.getText().length() == 0) {
+                    warningLabel.setText("type in all needed fields first!");
+                    pause(warningLabel);
+                } else {
+                    KuchenBodenImpl kuchenBoden = new KuchenBodenImpl("Obsttorte", hersteller,
+                            naehrwert, haltbarkeit, BigDecimal.valueOf(preis));
+                    if (baseCakeAllergene.size() != 0) {
+                        kuchenBoden.setAllergene(baseCakeAllergene);
+                    }
+                    Belag belagKuchen = new BelagImpl(kuchenBoden, toppingNameField.getText(), belagNaehrwert,
+                            belagHaltbarkeit, BigDecimal.valueOf(belagPreis));
+                    if (toppingAllergene.size() != 0) {
+                        belagKuchen.setAllergene(toppingAllergene);
+                    }
+
+                    if (automat.addKuchen(belagKuchen, belagKuchen.getName())) {
+                        System.out.println("added fruit tart to machine");
+                        kuchenList.getItems().add("Fach: " + belagKuchen.getFachnummer() + " " + belagKuchen.getName());
+                    }
+                }
+            } else if (rad_kremkuchen.isSelected()) {
+                if (preisField.getText().length() == 0 || durabilityField.getText().length() == 0 ||
+                        nutritionField.getText().length() == 0 || toppingNameField.getText().length() == 0) {
+                    warningLabel.setText("type in all needed fields first!");
+                    pause(warningLabel);
+                } else {
+                    KuchenBodenImpl kuchenBoden = new KuchenBodenImpl("Kremkuchen", hersteller,
+                            naehrwert, haltbarkeit, BigDecimal.valueOf(preis));
+                    if (baseCakeAllergene.size() != 0) {
+                        kuchenBoden.setAllergene(baseCakeAllergene);
+                    }
+                    Belag belagKuchen = new BelagImpl(kuchenBoden, toppingNameField.getText(), belagNaehrwert,
+                            belagHaltbarkeit, BigDecimal.valueOf(belagPreis));
+                    if (toppingAllergene.size() != 0) {
+                        belagKuchen.setAllergene(toppingAllergene);
+                    }
+                    if (automat.addKuchen(belagKuchen, belagKuchen.getName())) {
+                        System.out.println("added fruit tart to machine");
+                        kuchenList.getItems().add("Fach: " + belagKuchen.getFachnummer() + " " + belagKuchen.getName());
+                    }
+                }
+            } else if (rad_obstkuchen.isSelected()) {
+                if (preisField.getText().length() == 0 || durabilityField.getText().length() == 0 ||
+                        nutritionField.getText().length() == 0 || toppingNameField.getText().length() == 0) {
+                    warningLabel.setText("type in all needed fields first!");
+                    pause(warningLabel);
+                } else {
+                    KuchenBodenImpl kuchenBoden = new KuchenBodenImpl("Obstkuchen", hersteller,
+                            naehrwert, haltbarkeit, BigDecimal.valueOf(preis));
+                    if (baseCakeAllergene.size() != 0) {
+                        kuchenBoden.setAllergene(baseCakeAllergene);
+                    }
+                    Belag belagKuchen = new BelagImpl(kuchenBoden, toppingNameField.getText(), belagNaehrwert,
+                            belagHaltbarkeit, BigDecimal.valueOf(belagPreis));
+                    if (toppingAllergene.size() != 0) {
+                        belagKuchen.setAllergene(toppingAllergene);
+                    }
+                    if (automat.addKuchen(belagKuchen, belagKuchen.getName())) {
+                        System.out.println("added fruit tart to machine");
+                        kuchenList.getItems().add("Fach: " + belagKuchen.getFachnummer() + " " + belagKuchen.getName());
                     }
                 }
             }
@@ -379,26 +517,6 @@ public class ViewModel {
                     }
                 }
             }
-        }else if(rad_inspectionDate.isSelected()){
-
-        }else if(rad_durability.isSelected()){
-            kuchenList.getItems().clear();
-            List<Verkaufskuchen> list = new LinkedList<>();
-            for(int i=0; i<automat.getFaecherAnzahl(); i++){
-                if(automat.getKuchen(i) != null) {
-                    list.add(automat.getKuchen(i));
-                }
-            }
-            for(Verkaufskuchen list1 : list) {
-                System.out.println(list1.getName());
-                System.out.println(list1.getFachnummer());
-            }
-            for(int i=0; i<automat.kuchenAnzahlInAutomat(); i++){
-                Verkaufskuchen k = automat.getFastestExpiryCake(list);
-                kuchenList.getItems().add("Fach: " + k.getFachnummer() + " " + k.getName());
-                list.remove(k);
-            }
-            //TODO
         }
     }
 }

@@ -1,6 +1,6 @@
 package controller.events;
 
-import geschaeftslogik.automat.*;
+import model.geschaeftslogik.automat.*;
 
 import java.math.BigDecimal;
 import java.util.*;

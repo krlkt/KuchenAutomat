@@ -1,6 +1,6 @@
-package geschaeftslogik.persistence;
+package model.geschaeftslogik.persistence;
 
-import geschaeftslogik.automat.Automat;
+import model.geschaeftslogik.automat.Automat;
 
 import java.util.ArrayList;
 import java.util.Collection;

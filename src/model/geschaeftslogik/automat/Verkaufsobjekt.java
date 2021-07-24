@@ -1,4 +1,4 @@
-package geschaeftslogik.automat;
+package model.geschaeftslogik.automat;
 
 import java.math.BigDecimal;
 import java.time.Duration;

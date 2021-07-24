@@ -1,6 +1,6 @@
 import controller.beobachter.FastVollBeobachter;
 import controller.events.*;
-import geschaeftslogik.automat.Automat;
+import model.geschaeftslogik.automat.Automat;
 
 public class CLI_alternative {
     //Lösch und Allergene Auflisten Funktionalitäten sind deaktiviert und nur ein Beobachter ->

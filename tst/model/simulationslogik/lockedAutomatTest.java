@@ -1,4 +1,4 @@
-package simulationslogik;
+package model.simulationslogik;
 
 import model.geschaeftslogik.automat.*;
 import org.junit.Assert;
@@ -35,7 +35,7 @@ public class lockedAutomatTest {
     public void getOldestDate() throws Exception {
         automat.addHersteller(hersteller);
         automat.locked_addKuchen(obstkuchenB, "obsB", 3);
-        Thread.sleep(10);
+        Thread.sleep(1);
         automat.locked_addKuchen(obstkuchenA, "obsA", 2);
         automat.locked_addKuchen(obstkuchenA, "obsA", 1);
         Assert.assertEquals(automat.getOldestDate(), 3);

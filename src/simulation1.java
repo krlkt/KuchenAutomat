@@ -1,6 +1,6 @@
-import simulationslogik.sim1.Consumer;
-import simulationslogik.sim1.Producer;
-import simulationslogik.lockedAutomat;
+import model.simulationslogik.sim1.Consumer;
+import model.simulationslogik.sim1.Producer;
+import model.simulationslogik.lockedAutomat;
 
 public class simulation1 {
 

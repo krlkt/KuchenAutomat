@@ -1,4 +1,4 @@
-package geschaeftslogik.automat;
+package model.geschaeftslogik.automat;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -13,14 +13,18 @@ import java.util.List;
 
 
 public class AutomatTest {
-    Automat automat = new Automat(100);
-    Hersteller hersteller = new HerstellerImpl("hersteller");
+    Automat automat = null;
+    Hersteller hersteller = null;
 
-    Obstkuchen obstkuchenA = new ObstkuchenImpl("Erdbeeren, Kiwis", hersteller, 500, 50, BigDecimal.valueOf(5.5));
-    Obstkuchen obstkuchenB = new ObstkuchenImpl("Bananen, Mango", hersteller, 500, 50, BigDecimal.valueOf(5.5));
+    Obstkuchen obstkuchenA = null;
+    Obstkuchen obstkuchenB = null;
 
     @Before
     public void addHerstellerToAutomat(){
+        automat = new Automat(100);
+        hersteller = new HerstellerImpl("hersteller");
+        obstkuchenA  = new ObstkuchenImpl("Erdbeeren, Kiwis", hersteller, 500, 50, BigDecimal.valueOf(5.5));
+        obstkuchenB = new ObstkuchenImpl("Bananen, Mango", hersteller, 500, 50, BigDecimal.valueOf(5.5));
         automat.addHersteller(hersteller);
     }
 

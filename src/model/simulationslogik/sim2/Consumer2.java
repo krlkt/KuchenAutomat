@@ -1,9 +1,6 @@
-package simulationslogik.sim2;
+package model.simulationslogik.sim2;
 
-import simulationslogik.lockedAutomat;
-import simulationslogik.sim1.Consumer;
-
-import java.util.Random;
+import model.simulationslogik.lockedAutomat;
 
 public class Consumer2 extends Thread {
     private final lockedAutomat automat;

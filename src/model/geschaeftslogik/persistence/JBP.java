@@ -1,6 +1,6 @@
-package geschaeftslogik.persistence;
+package model.geschaeftslogik.persistence;
 
-import geschaeftslogik.automat.*;
+import model.geschaeftslogik.automat.*;
 
 import java.beans.*;
 import java.io.*;

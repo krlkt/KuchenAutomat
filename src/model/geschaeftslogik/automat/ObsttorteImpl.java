@@ -1,4 +1,4 @@
-package geschaeftslogik.automat;
+package model.geschaeftslogik.automat;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -80,8 +80,6 @@ public class ObsttorteImpl implements Obsttorte, Serializable {
     public Date getInspektionsdatum() {
         return inspektionsDatum;
     }
-
-
 
     @Override
     public int getFachnummer() {

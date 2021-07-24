@@ -1,7 +1,7 @@
-package simulationslogik.sim1;
+package model.simulationslogik.sim1;
 
-import simulationslogik.Util;
-import simulationslogik.lockedAutomat;
+import model.simulationslogik.Util;
+import model.simulationslogik.lockedAutomat;
 
 import java.util.Random;
 

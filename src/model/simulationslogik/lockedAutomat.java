@@ -1,4 +1,4 @@
-package simulationslogik;
+package model.simulationslogik;
 
 import model.geschaeftslogik.automat.Automat;
 import model.geschaeftslogik.automat.Verkaufskuchen;

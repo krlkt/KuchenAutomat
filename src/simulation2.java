@@ -1,13 +1,7 @@
-import geschaeftslogik.automat.Hersteller;
-import geschaeftslogik.automat.HerstellerImpl;
-import geschaeftslogik.automat.Obstkuchen;
-import geschaeftslogik.automat.ObstkuchenImpl;
-import simulationslogik.sim2.Inspector;
-import simulationslogik.lockedAutomat;
-import simulationslogik.sim2.Consumer2;
-import simulationslogik.sim2.Producer2;
-
-import java.math.BigDecimal;
+import model.simulationslogik.sim2.Inspector;
+import model.simulationslogik.lockedAutomat;
+import model.simulationslogik.sim2.Consumer2;
+import model.simulationslogik.sim2.Producer2;
 
 public class simulation2 {
     public static void main(String[] args) throws Exception {

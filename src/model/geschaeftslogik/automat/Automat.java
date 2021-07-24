@@ -1,4 +1,4 @@
-package geschaeftslogik.automat;
+package model.geschaeftslogik.automat;
 
 import controller.beobachter.Beobachter;
 import controller.beobachter.Subjekt;

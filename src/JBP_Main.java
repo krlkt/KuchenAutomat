@@ -1,5 +1,5 @@
-import geschaeftslogik.automat.*;
-import geschaeftslogik.persistence.JBP;
+import model.geschaeftslogik.automat.*;
+import model.geschaeftslogik.persistence.JBP;
 
 import java.util.Arrays;
 

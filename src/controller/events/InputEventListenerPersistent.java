@@ -1,9 +1,9 @@
 package controller.events;
 
-import geschaeftslogik.automat.Automat;
-import geschaeftslogik.automat.Mode;
-import geschaeftslogik.persistence.JBP;
-import geschaeftslogik.persistence.JOS;
+import model.geschaeftslogik.automat.Automat;
+import model.geschaeftslogik.automat.Mode;
+import model.geschaeftslogik.persistence.JBP;
+import model.geschaeftslogik.persistence.JOS;
 
 public class InputEventListenerPersistent implements InputEventListener{
     Automat automat;

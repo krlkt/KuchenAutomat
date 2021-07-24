@@ -1,5 +1,5 @@
 package controller.beobachter;
-import geschaeftslogik.automat.Automat;
+import model.geschaeftslogik.automat.Automat;
 
 public class FastVollBeobachter implements Beobachter{
     private Automat automat;

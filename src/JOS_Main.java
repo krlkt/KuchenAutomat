@@ -1,5 +1,5 @@
-import geschaeftslogik.automat.*;
-import geschaeftslogik.persistence.JOS;
+import model.geschaeftslogik.automat.*;
+import model.geschaeftslogik.persistence.JOS;
 import java.util.Arrays;
 
 public class JOS_Main {

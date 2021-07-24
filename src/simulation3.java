@@ -1,7 +1,7 @@
-import simulationslogik.lockedAutomat;
-import simulationslogik.sim2.Inspector;
-import simulationslogik.sim3.Consumer3;
-import simulationslogik.sim3.Producer3;
+import model.simulationslogik.lockedAutomat;
+import model.simulationslogik.sim2.Inspector;
+import model.simulationslogik.sim3.Consumer3;
+import model.simulationslogik.sim3.Producer3;
 
 public class simulation3 {
     public static void main(String[] args) {
