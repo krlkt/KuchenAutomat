@@ -1,7 +1,7 @@
 # Intro
 Karel Karunia (575892)  
 Kuchen Automat - Java Software  
-Bedienung von einem Kuchenautomat leicht gemacht.
+Bedienung von einem Kuchenautomat leicht gemacht     
 Persistierte und Thread sicherte Software, inkl. CLI für Verwalter.
 
 # GUI
