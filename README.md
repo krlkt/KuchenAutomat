@@ -1,6 +1,6 @@
 # Intro
-Karel Karunia (575892) <br />
-Kuchen Automat - Java Software <br />
+Karel Karunia (575892)  
+Kuchen Automat - Java Software  
 Bedienung von einem Kuchenautomat leicht gemacht.
 
 # Features  
@@ -16,14 +16,14 @@ vollständige, threadsichere GL
 vollständiges CLI inkl. alternatives CLI                 
 vollständiges GUI                                        
 events (mindestens 3)                                    
-observer ^ property change propagation                   
-angemessene Aufzählungstypen
+observer ^ property change propagation                    
+angemessene Aufzählungstypen  
 Simulationen 2 & 3                                       
 data binding                                             
 JBP und JOS                                              
 
 Zusätzliche Anforderung:  
 Kuchen nach Dekoratormuster                              
-korrekte Aggregationen
+korrekte Aggregationen   
 Erstellung der Kuchen im UI                              
 
