@@ -1,6 +1,6 @@
 # Intro
-Karel Karunia (575892)
-Kuchen Automat - Java Software
+Karel Karunia (575892) <br />
+Kuchen Automat - Java Software <br />
 Bedienung von einem Kuchenautomat leicht gemacht.
 
 # Features
