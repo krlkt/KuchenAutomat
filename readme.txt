@@ -1,25 +1,29 @@
-Karel Karunia (575892) -- Beleg Abgabe
-die Features, die ich gar nicht implementiert habe, habe ich nicht in der Liste unten NICHT mitgeschrieben
+# Intro
+Karel Karunia (575892)
+Kuchen Automat - Java Software
+Bedienung von einem Kuchenautomat leicht gemacht.
 
+# Features
 Basis Funktionalität:
 CRUD
-CLI                                                      //(src/controller)
-Simulation 1                                             //(src/model/simulationslogik)
-GUI                                                      //(src/ui/controller/ViewModel)
-I/O                                                      //(src/model/geschaeftslogik/persistence)
+CLI                                                      
+Simulation 1                                             
+GUI                                                      
+I/O                                                      
 
 Funktionalität:
-vollständige, threadsichere GL                           //(src/model/simulationslogik /lockedAutomat)
-vollständiges CLI inkl. alternatives CLI                 //(src/controller)
-vollständiges GUI                                        //außer sort by Inspektionsdatum und verbleibender Haltbarkeit
-events (mindestens 3)                                    //(src/controller)
-observer ^ property change propagation                   //aber keine property change propagation
+vollständige, threadsichere GL                           
+vollständiges CLI inkl. alternatives CLI                 
+vollständiges GUI                                        
+events (mindestens 3)                                    
+observer ^ property change propagation                   
 angemessene Aufzählungstypen
-Simulationen 2 & 3                                       //(src/model/simulationslogik)
-data binding                                             //falls Sie meinen data binding zwischen Automat und GUI List View dann ja
-JBP und JOS                                              //(src/model/geschaeftslogik/persistence)
+Simulationen 2 & 3                                       
+data binding                                             
+JBP und JOS                                              
 
 Zusätzliche Anforderung:
-Kuchen nach Dekoratormuster                              //(src/model/geschaeftslogik/automat/belag)
+Kuchen nach Dekoratormuster                              
 korrekte Aggregationen
-Erstellung der Kuchen im UI                              //nur im App_GUI implementiert und leider nicht genau richtig implementiert
+Erstellung der Kuchen im UI                              
+
