@@ -2,6 +2,10 @@
 Karel Karunia (575892)  
 Kuchen Automat - Java Software  
 Bedienung von einem Kuchenautomat leicht gemacht.
+Persistierte und Thread sicherte Software, inkl. CLI für Verwalter.
+
+# GUI
+![](GUI.png)
 
 # Features  
 Basis Funktionalität:   
@@ -20,7 +24,7 @@ observer ^ property change propagation
 angemessene Aufzählungstypen  
 Simulationen 2 & 3                                       
 data binding                                             
-JBP und JOS                                              
+Persistency: JBP und JOS                                              
 
 Zusätzliche Anforderung:  
 Kuchen nach Dekoratormuster                              
