@@ -3,15 +3,15 @@ Karel Karunia (575892) <br />
 Kuchen Automat - Java Software <br />
 Bedienung von einem Kuchenautomat leicht gemacht.
 
-# Features
-Basis Funktionalität:
+# Features  
+Basis Funktionalität:   
 CRUD
 CLI                                                      
 Simulation 1                                             
 GUI                                                      
 I/O                                                      
 
-Funktionalität:
+Funktionalität:   
 vollständige, threadsichere GL                           
 vollständiges CLI inkl. alternatives CLI                 
 vollständiges GUI                                        
@@ -22,7 +22,7 @@ Simulationen 2 & 3
 data binding                                             
 JBP und JOS                                              
 
-Zusätzliche Anforderung:
+Zusätzliche Anforderung:  
 Kuchen nach Dekoratormuster                              
 korrekte Aggregationen
 Erstellung der Kuchen im UI                              
